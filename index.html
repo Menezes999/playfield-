@@ -1,60 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlayField</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayField</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Cabeçalho -->
-  <header class="header">
-    <div class="header-left">
-      <span class="logo">PlayField</span>
-      <nav class="nav">
-        <a href="#store" class="nav-link">Loja</a>
-        <a href="#library" class="nav-link">Biblioteca</a>
-        <a href="#community" class="nav-link">Comunidade</a>
-        <a href="#galaxy" class="nav-link">Galáxia</a>
-      </nav>
-    </div>
-    <div class="header-right">
-      <div class="user-info">
-        <div class="avatar" id="user-avatar">P</div>
-        <span id="user-name" class="user-name">Convidado</span>
-      </div>
-    </div>
-  </header>
 
-  <!-- Destaques e Recomendações -->
-  <main>
-    <section class="carousel">
-      <div class="carousel-item">
-        <img src="https://via.placeholder.com/800x400" alt="Destaque 1">
-        <div class="carousel-info">
-          <h2>Hunt: Showdown</h2>
-          <p>Explore este sombrio jogo de ação tática.</p>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">PlayField</div>
+        <nav class="nav">
+            <a href="#" class="nav-link">Loja</a>
+            <a href="#" class="nav-link">Biblioteca</a>
+            <a href="#" class="nav-link">Comunidade</a>
+            <a href="#" class="nav-link">Galáxy</a>
+        </nav>
+        <div class="user-info">
+            <div class="avatar" id="avatar">P</div>
+            <span id="user-name">Bem-vindo, usuário!</span>
         </div>
-      </div>
-      <!-- Mais itens aqui -->
+    </header>
+
+    <!-- Carrossel de Destaques -->
+    <section class="carousel">
+        <div class="carousel-item">
+            <img src="https://store.steampowered.com/public/images/steamdeck/steamdeck_white_main.jpg" alt="Steam Deck" class="carousel-img">
+            <div class="carousel-info">
+                <h2>Steam Deck</h2>
+                <p>Os jogos em qualquer lugar</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg?t=1678238381" alt="Hunt: Showdown" class="carousel-img">
+            <div class="carousel-info">
+                <h2>Hunt: Showdown 1896</h2>
+                <p>Recomendado por jogar jogos com os marcadores</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Barra lateral -->
+    <!-- Barra Lateral -->
     <aside class="sidebar">
-      <h3>Seus Marcadores</h3>
-      <ul>
-        <li><a href="#">Crime</a></li>
-        <li><a href="#">Zumbis</a></li>
-        <li><a href="#">Simulador</a></li>
-        <li><a href="#">FPS</a></li>
-      </ul>
+        <h3>Marcos e Recomendações</h3>
+        <ul>
+            <li><a href="#">Crime</a></li>
+            <li><a href="#">Zumbis</a></li>
+            <li><a href="#">Simulador Automobilístico</a></li>
+            <li><a href="#">Tiro em Primeira Pessoa</a></li>
+            <li><a href="#">Tiro</a></li>
+        </ul>
     </aside>
-  </main>
 
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2024 PlayField. Todos os direitos reservados.</p>
-  </footer>
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 PlayField. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>
