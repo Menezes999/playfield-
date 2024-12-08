@@ -15,4 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     userAvatar.style.backgroundSize = "cover";
     userAvatar.style.color = "transparent";
   }
+
+  // Simula criação de conta
+  if (!storedName) {
+    const newName = prompt("Escolha seu nome:");
+    localStorage.setItem("userName", newName);
+    userName.textContent = newName;
+    userAvatar.textContent = newName[0];
+  }
 });
