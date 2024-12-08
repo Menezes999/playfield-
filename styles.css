@@ -1,5 +1,5 @@
-/* Resetações básicas */
-body, h1, h2, p, ul, li, button {
+/* Resetações */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,38 +9,37 @@ body {
   font-family: Arial, sans-serif;
   background-color: #1b2838;
   color: #c7d5e0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
   background-color: #171a21;
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  padding: 10px 20px;
   align-items: center;
 }
 
 .logo {
-  font-size: 24px;
   color: #66c0f4;
+  font-size: 24px;
   font-weight: bold;
 }
 
-nav ul {
-  list-style: none;
+.nav {
   display: flex;
+  gap: 15px;
 }
 
-nav ul li {
-  margin-left: 20px;
-}
-
-nav ul li a {
+.nav-link {
   text-decoration: none;
   color: #c7d5e0;
+  font-size: 14px;
 }
 
-nav ul li a:hover {
+.nav-link:hover {
   color: #66c0f4;
 }
 
@@ -49,53 +48,42 @@ nav ul li a:hover {
   align-items: center;
 }
 
-.user-avatar {
-  background-color: #66c0f4;
-  border-radius: 50%;
+.avatar {
   width: 40px;
   height: 40px;
+  background-color: #66c0f4;
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: #1b2838;
+  justify-content: center;
+  color: white;
   margin-right: 10px;
 }
 
 main {
+  flex: 1;
+  display: flex;
+}
+
+.highlights {
+  flex: 3;
+  margin: 20px;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #2a475e;
+  padding: 20px;
+  color: #fff;
+}
+
+.library {
   padding: 20px;
 }
 
-.carousel {
-  margin: 20px 0;
-}
-
-.carousel-item {
-  display: flex;
-  background-color: #2a475e;
-  padding: 10px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.carousel-item img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.categories ul {
-  list-style: none;
-  display: flex;
-  gap: 10px;
+footer {
+  background-color: #171a21;
+  text-align: center;
+  color: #c7d5e0;
   padding: 10px 0;
-}
-
-.categories li {
-  background-color: #2a475e;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.categories li:hover {
-  background-color: #66c0f4;
 }
