@@ -1,44 +1,101 @@
+/* Resetações básicas */
+body, h1, h2, p, ul, li, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
   background-color: #1b2838;
   color: #c7d5e0;
+  margin: 0;
 }
 
 header {
   background-color: #171a21;
   padding: 10px 20px;
-}
-
-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.logo {
+  font-size: 24px;
+  color: #66c0f4;
+  font-weight: bold;
+}
+
 nav ul {
   list-style: none;
   display: flex;
-  gap: 15px;
 }
 
-nav a {
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
   text-decoration: none;
   color: #c7d5e0;
+}
+
+nav ul li a:hover {
+  color: #66c0f4;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  background-color: #66c0f4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1b2838;
+  margin-right: 10px;
 }
 
 main {
   padding: 20px;
 }
 
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+.carousel {
+  margin: 20px 0;
 }
 
-footer {
-  text-align: center;
+.carousel-item {
+  display: flex;
+  background-color: #2a475e;
   padding: 10px;
-  background-color: #171a21;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-item img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.categories ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.categories li {
+  background-color: #2a475e;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.categories li:hover {
+  background-color: #66c0f4;
 }
