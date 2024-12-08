@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayField - Catálogo</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #111;
+            border-bottom: 1px solid #333;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ff6600;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        .catalog {
+            padding: 2rem;
+        }
+        .catalog h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .games {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+        .game-card {
+            min-width: 200px;
+            background-color: #111;
+            color: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+        .game-card h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PlayField</h1>
+        <div class="user-icon" id="userIcon"></div>
+    </div>
+    <div class="catalog">
+        <h2>Jogos Disponíveis</h2>
+        <div class="games">
+            <!-- Exemplos de Jogos -->
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 1">
+                <h3>Jogo 1</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 2">
+                <h3>Jogo 2</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 3">
+                <h3>Jogo 3</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 4">
+                <h3>Jogo 4</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obter o nome do usuário salvo no localStorage
+        const userName = localStorage.getItem('playfieldUserName');
+        const userIcon = document.getElementById('userIcon');
+
+        // Mostrar a primeira letra do nome como ícone de usuário
+        if (userName) {
+            userIcon.textContent = userName[0].toUpperCase();
+        }
+    </script>
+</body>
+</html>
