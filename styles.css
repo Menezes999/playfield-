@@ -1,158 +1,157 @@
-/* Reset */
+/* Reset geral */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* Estilo geral */
 body {
-  font-family: "Arial", sans-serif;
-  background-color: #1b2838;
-  color: #c7d5e0;
+    font-family: Arial, sans-serif;
+    background-color: #171a21;
+    color: #c7d5e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
-  background-color: #171a21;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  align-items: center;
+    background-color: #0c0f14;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-  color: #66c0f4;
-  font-size: 24px;
-  font-weight: bold;
+    font-size: 24px;
+    color: #66c0f4;
+    font-weight: bold;
 }
 
 .nav {
-  display: flex;
-  gap: 15px;
+    display: flex;
+    gap: 20px;
 }
 
 .nav-link {
-  text-decoration: none;
-  color: #c7d5e0;
-  font-size: 14px;
+    color: #c7d5e0;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .nav-link:hover {
-  color: #66c0f4;
+    color: #66c0f4;
 }
 
 .user-info {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    color: #c7d5e0;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #66c0f4;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #66c0f4;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 .carousel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #222a33;
 }
 
 .carousel-item {
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  position: relative;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
 .carousel-info {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: #fff;
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    color: white;
+    font-size: 18px;
+}
+
+.carousel-info h2 {
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .sidebar {
-  background-color: #2a475e;
-  padding: 20px;
-  color: #fff;
-  display: block;
+    background-color: #2a475e;
+    color: #c7d5e0;
+    padding: 20px;
+    display: block;
+}
+
+.sidebar h3 {
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar li {
+    margin: 5px 0;
+}
+
+.sidebar a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #66c0f4;
 }
 
 footer {
-  background-color: #171a21;
-  text-align: center;
-  color: #c7d5e0;
-  padding: 10px 0;
+    background-color: #0c0f14;
+    text-align: center;
+    padding: 20px;
+    color: #c7d5e0;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 10px;
-  }
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .user-info {
-    margin-top: 10px;
-    justify-content: flex-start;
-  }
+    .user-info {
+        margin-top: 10px;
+    }
 
-  .carousel {
-    flex-direction: column;
-    padding: 10px;
-  }
+    .carousel {
+        flex-direction: column;
+    }
 
-  .carousel-item {
-    max-width: 100%;
-  }
-
-  .sidebar {
-    display: none; /* Esconde a sidebar em telas menores */
-  }
-
-  footer {
-    padding: 20px 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: 20px;
-  }
-
-  .nav-link {
-    font-size: 12px;
-  }
-
-  .avatar {
-    width: 35px;
-    height: 35px;
-  }
-
-  .carousel-info h2 {
-    font-size: 18px;
-  }
-
-  .carousel-info p {
-    font-size: 14px;
-  }
+    .sidebar {
+        display: none;
+    }
 }
