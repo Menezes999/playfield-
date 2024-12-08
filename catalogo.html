@@ -163,7 +163,62 @@
                 <img src="https://via.placeholder.com/200x150" alt="Game 1">
                 <h3>Game 1</h3>
             </div>
-            <!-- Outros jogos podem ser adicionados aqui -->
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 2">
+                <h3>Game 2</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 3">
+                <h3>Game 3</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">Aventura</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 4">
+                <h3>Game 4</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 5">
+                <h3>Game 5</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 6">
+                <h3>Game 6</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">Estratégia</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 7">
+                <h3>Game 7</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 8">
+                <h3>Game 8</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 9">
+                <h3>Game 9</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">Esportes</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 10">
+                <h3>Game 10</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 11">
+                <h3>Game 11</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 12">
+                <h3>Game 12</h3>
+            </div>
         </div>
     </div>
 
@@ -197,53 +252,43 @@
 
         // Exibir nome do perfil
         const userName = localStorage.getItem('playfieldUserName');
-        profileName.textContent = userName || "Visitante";
+        profileName.textContent = userName ||
 
-        // Exibir a inicial do nome do usuário antes de fazer o upload da foto
-        if (!localStorage.getItem('playfieldProfilePic')) {
-            userIcon.textContent = userName ? userName[0].toUpperCase() : '?';
+// Exibir nome do perfil
+        const userName = localStorage.getItem('playfieldUserName');
+        profileName.textContent = userName || "Usuário";
+
+        // Exibir foto de perfil
+        const profilePic = localStorage.getItem('playfieldProfilePic');
+        const userIcon = document.getElementById('userIcon');
+        
+        if (profilePic) {
+            userIcon.innerHTML = `<img src="${profilePic}" alt="Foto de perfil">`;
+        } else {
+            userIcon.textContent = userName ? userName.charAt(0).toUpperCase() : "U";
         }
 
+        // Abrir gaveta lateral ao clicar no ícone do usuário
         userIcon.addEventListener('click', () => {
             drawer.classList.add('open');
         });
 
+        // Fechar gaveta lateral
         closeDrawer.addEventListener('click', () => {
             drawer.classList.remove('open');
         });
 
+        // Alterar foto de perfil
         saveProfilePic.addEventListener('click', () => {
             const file = profilePicInput.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Atualizar a foto de perfil e armazenar no localStorage
-                    userIcon.innerHTML = `<img src="${e.target.result}" alt="Foto de Perfil">`;
-                    localStorage.setItem('playfieldProfilePic', e.target.result);
-
-                    // Exibir o pop-up de confirmação
-                    alert("Sua foto de perfil foi alterada! Wooooop!");
+                reader.onloadend = () => {
+                    localStorage.setItem('playfieldProfilePic', reader.result);
+                    userIcon.innerHTML = `<img src="${reader.result}" alt="Foto de perfil">`;
+                    alert('Sua foto de perfil foi alterada! Wooooop!');
                 };
                 reader.readAsDataURL(file);
-            }
-        });
-
-        // Carregar foto de perfil salva, se houver
-        const savedProfilePic = localStorage.getItem('playfieldProfilePic');
-        if (savedProfilePic) {
-            userIcon.innerHTML = `<img src="${savedProfilePic}" alt="Foto de Perfil">`;
-        }
-
-        // Salvar o nome do usuário ao se cadastrar
-        const userNameInput = document.getElementById('userName');
-        const passwordInput = document.getElementById('password');
-        const loginButton = document.getElementById('loginButton');
-
-        loginButton.addEventListener('click', () => {
-            const userNameValue = userNameInput.value.trim();
-            if (userNameValue) {
-                localStorage.setItem('playfieldUserName', userNameValue);
-                window.location.href = 'catalogo.html';
             }
         });
     </script>
