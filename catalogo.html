@@ -10,7 +10,6 @@
             font-family: Arial, sans-serif;
             background-color: #000;
             color: #fff;
-            overflow-x: hidden;
         }
         .header {
             display: flex;
@@ -36,13 +35,6 @@
             border-radius: 50%;
             font-weight: bold;
             cursor: pointer;
-            overflow: hidden;
-        }
-        .user-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
         }
         .slideshow {
             position: relative;
@@ -92,8 +84,9 @@
             border-radius: 10px;
             margin-bottom: 0.5rem;
         }
-        .category-title {
-            margin-top: 2rem;
+        .game-card h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
         }
         /* Gaveta Lateral */
         .drawer {
@@ -116,19 +109,8 @@
             margin: 0;
             margin-bottom: 1rem;
         }
-        .drawer input,
-        .drawer button {
-            width: 100%;
+        .drawer input {
             margin-top: 1rem;
-            padding: 0.5rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-        }
-        .drawer button {
-            background-color: #ff6600;
-            color: #fff;
-            cursor: pointer;
         }
         .close-btn {
             position: absolute;
@@ -156,53 +138,56 @@
         </div>
     </div>
 
+    <!-- Catálogo de Jogos -->
     <div class="catalog">
-        <!-- Categorias de Jogos -->
-        <h2 class="category-title">Ação</h2>
+        <!-- Categoria de Jogos Ação -->
+        <h2>Ação</h2>
         <div class="games">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 1">
-                <h3>Game 1</h3>
+                <h3>Jogo 1</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 2">
-                <h3>Game 2</h3>
+                <h3>Jogo 2</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 3">
-                <h3>Game 3</h3>
+                <h3>Jogo 3</h3>
             </div>
         </div>
 
-        <h2 class="category-title">Aventura</h2>
+        <!-- Categoria de Jogos Aventura -->
+        <h2>Aventura</h2>
         <div class="games">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 4">
-                <h3>Game 4</h3>
+                <h3>Jogo 4</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 5">
-                <h3>Game 5</h3>
+                <h3>Jogo 5</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 6">
-                <h3>Game 6</h3>
+                <h3>Jogo 6</h3>
             </div>
         </div>
 
-        <h2 class="category-title">Estratégia</h2>
+        <!-- Categoria de Jogos Estratégia -->
+        <h2>Estratégia</h2>
         <div class="games">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 7">
-                <h3>Game 7</h3>
+                <h3>Jogo 7</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 8">
-                <h3>Game 8</h3>
+                <h3>Jogo 8</h3>
             </div>
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 9">
-                <h3>Game 9</h3>
+                <h3>Jogo 9</h3>
             </div>
         </div>
     </div>
@@ -252,3 +237,20 @@
 
         // Abrir Gaveta Lateral
         userIcon.addEventListener('click', () => {
+            drawer.classList.add('open');
+        });
+
+        // Fechar Gaveta Lateral
+        closeDrawer.addEventListener('click', () => {
+            drawer.classList.remove('open');
+        });
+
+        // Alterar Foto de Perfil
+        saveProfilePic.addEventListener('click', () => {
+            const file = profilePicInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    localStorage.setItem('playfieldProfilePic', reader.result);
+                    const img = document.createElement('img');
+                    img.src = reader
