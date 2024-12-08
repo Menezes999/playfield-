@@ -1,29 +1,50 @@
-// Armazenar dados da conta no localStorage
-function saveUserData() {
-    const name = document.getElementById('user-name').textContent;
-    const avatar = document.getElementById('avatar').textContent;
-
-    localStorage.setItem('userName', name);
-    localStorage.setItem('avatar', avatar);
+// Exibir o modal de login
+function showLogin() {
+    document.getElementById('login-modal').style.display = 'flex';
 }
 
-// Carregar dados da conta, se existir
-function loadUserData() {
-    const savedName = localStorage.getItem('userName');
-    const savedAvatar = localStorage.getItem('avatar');
+// Exibir o modal de registro
+function showRegister() {
+    document.getElementById('register-modal').style.display = 'flex';
+}
 
-    if (savedName && savedAvatar) {
-        document.getElementById('user-name').textContent = savedName;
-        document.getElementById('avatar').textContent = savedAvatar;
+// Fechar o modal
+function closeModal() {
+    document.getElementById('login-modal').style.display = 'none';
+    document.getElementById('register-modal').style.display = 'none';
+}
+
+// Login de usuário
+function loginUser() {
+    const username = document.getElementById('login-name').value;
+    const password = document.getElementById('login-password').value;
+    if (username && password) {
+        localStorage.setItem('userName', username);
+        document.getElementById('user-name').textContent = username;
+        document.getElementById('avatar').textContent = username.charAt(0).toUpperCase();
+        closeModal();
     }
 }
 
-// Função para alterar o nome do usuário e avatar
-function changeUserData(name, avatar) {
-    document.getElementById('user-name').textContent = name;
-    document.getElementById('avatar').textContent = avatar || name.charAt(0).toUpperCase();
-    saveUserData();
+// Registro de novo usuário
+function registerUser() {
+    const username = document.getElementById('register-name').value;
+    const password = document.getElementById('register-password').value;
+    if (username && password) {
+        localStorage.setItem('userName', username);
+        document.getElementById('user-name').textContent = username;
+        document.getElementById('avatar').textContent = username.charAt(0).toUpperCase();
+        closeModal();
+    }
 }
 
-// Chamadas iniciais
+// Carregar dados do usuário
+function loadUserData() {
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        document.getElementById('user-name').textContent = userName;
+        document.getElementById('avatar').textContent = userName.charAt(0).toUpperCase();
+    }
+}
+
 loadUserData();
