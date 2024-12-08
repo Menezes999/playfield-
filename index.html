@@ -3,69 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField</title>
+    <title>PlayField - Sua Loja de Jogos</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Cabeçalho -->
     <header class="header">
         <div class="logo">PlayField</div>
-        <nav class="nav">
-            <a href="#">Início</a>
-            <a href="#">Jogos</a>
-            <a href="#">Categorias</a>
-            <a href="#">Loja</a>
+        <nav class="navbar">
+            <a href="#home">Início</a>
+            <a href="#games">Jogos</a>
+            <a href="#store">Loja</a>
+            <a href="#profile">Perfil</a>
         </nav>
-        <div class="user-info">
-            <div class="avatar" id="avatar">P</div>
-            <span id="user-name">Entrar</span>
+        <div class="theme-switcher">
+            <button id="toggle-theme">🌙</button>
         </div>
     </header>
 
-    <!-- Carrossel de Destaque -->
-    <section class="carousel">
+    <!-- Carrossel -->
+    <section class="carousel" id="home">
         <div class="carousel-item">
-            <img src="https://placehold.co/800x300" alt="Destaque 1">
-            <h2>Jogo em Destaque</h2>
+            <img src="https://placehold.co/800x300" alt="Jogo em Destaque">
+            <div class="carousel-info">
+                <h2>Jogo Incrível</h2>
+                <p>Aproveite agora!</p>
+                <button>Saiba Mais</button>
+            </div>
         </div>
     </section>
 
-    <!-- Categorias -->
-    <section class="categories">
-        <h2>Categorias</h2>
-        <div class="category-buttons">
-            <button>Ação</button>
-            <button>Aventura</button>
-            <button>RPG</button>
-            <button>Estratégia</button>
-        </div>
-    </section>
-
-    <!-- Lista de Jogos -->
-    <section class="game-list">
+    <!-- Jogos Populares -->
+    <section class="game-section" id="games">
         <h2>Jogos Populares</h2>
-        <div class="games">
+        <div class="game-list">
             <div class="game-card">
                 <img src="https://placehold.co/200x200" alt="Jogo 1">
-                <div class="game-info">
-                    <h3>Jogo 1</h3>
-                    <button>Ver mais</button>
-                </div>
+                <h3>Jogo 1</h3>
+                <p>Descrição curta do jogo.</p>
+                <button>Ver Mais</button>
             </div>
             <div class="game-card">
                 <img src="https://placehold.co/200x200" alt="Jogo 2">
-                <div class="game-info">
-                    <h3>Jogo 2</h3>
-                    <button>Ver mais</button>
-                </div>
+                <h3>Jogo 2</h3>
+                <p>Descrição curta do jogo.</p>
+                <button>Ver Mais</button>
             </div>
-            <div class="game-card">
-                <img src="https://placehold.co/200x200" alt="Jogo 3">
-                <div class="game-info">
-                    <h3>Jogo 3</h3>
-                    <button>Ver mais</button>
-                </div>
-            </div>
+            <!-- Adicione mais jogos aqui -->
         </div>
     </section>
 
@@ -73,7 +58,5 @@
     <footer class="footer">
         <p>&copy; 2024 PlayField. Todos os direitos reservados.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
