@@ -20,10 +20,8 @@ document.getElementById("login-form").addEventListener("submit", (e) => {
             localStorage.setItem("profilePic", reader.result);
         };
         reader.readAsDataURL(profilePic);
-    } else {
-        localStorage.setItem("profilePic", "");
     }
 
     alert(`Bem-vindo, ${username}!`);
-    window.location.href = "#library";
+    window.location.href = "#games";
 });
