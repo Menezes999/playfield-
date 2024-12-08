@@ -1,25 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const userName = document.getElementById("user-name");
-  const userAvatar = document.getElementById("user-avatar");
+// Armazenar dados da conta no localStorage
+function saveUserData() {
+    const name = document.getElementById('user-name').textContent;
+    const avatar = document.getElementById('avatar').textContent;
 
-  const storedName = localStorage.getItem("userName");
-  const storedAvatar = localStorage.getItem("userAvatar");
+    localStorage.setItem('userName', name);
+    localStorage.setItem('avatar', avatar);
+}
 
-  if (storedName) {
-    userName.textContent = storedName;
-    userAvatar.textContent = storedName[0];
-  }
+// Carregar dados da conta, se existir
+function loadUserData() {
+    const savedName = localStorage.getItem('userName');
+    const savedAvatar = localStorage.getItem('avatar');
 
-  if (storedAvatar) {
-    userAvatar.style.backgroundImage = `url(${storedAvatar})`;
-    userAvatar.style.backgroundSize = "cover";
-    userAvatar.style.color = "transparent";
-  }
+    if (savedName && savedAvatar) {
+        document.getElementById('user-name').textContent = savedName;
+        document.getElementById('avatar').textContent = savedAvatar;
+    }
+}
 
-  if (!storedName) {
-    const newName = prompt("Escolha seu nome:");
-    localStorage.setItem("userName", newName);
-    userName.textContent = newName;
-    userAvatar.textContent = newName[0];
-  }
-});
+// Função para alterar o nome do usuário e avatar
+function changeUserData(name, avatar) {
+    document.getElementById('user-name').textContent = name;
+    document.getElementById('avatar').textContent = avatar || name.charAt(0).toUpperCase();
+    saveUserData();
+}
+
+// Chamadas iniciais
+loadUserData();
