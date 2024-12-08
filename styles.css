@@ -1,9 +1,16 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Estilo Global */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
     background-color: #121212;
     color: #fff;
+    line-height: 1.6;
 }
 
 /* Cabeçalho */
@@ -13,9 +20,6 @@ body {
     align-items: center;
     padding: 15px 30px;
     background-color: #1f1f1f;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .logo {
@@ -24,30 +28,19 @@ body {
     color: #00c853;
 }
 
-.nav a {
-    color: #fff;
+.navbar a {
     margin-left: 20px;
     text-decoration: none;
-    font-size: 16px;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    background-color: #00c853;
     color: #fff;
-    border-radius: 50%;
+}
+
+.navbar a:hover {
+    color: #00c853;
+}
+
+.theme-switcher {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-right: 10px;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 /* Carrossel */
@@ -62,77 +55,33 @@ body {
     border-radius: 10px;
 }
 
-.carousel h2 {
-    margin-top: 10px;
+.carousel-info {
+    margin-top: 15px;
 }
 
-/* Categorias */
-.categories {
+/* Jogos Populares */
+.game-section {
     margin: 20px;
-    text-align: center;
 }
 
-.category-buttons button {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #00c853;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.category-buttons button:hover {
-    background-color: #009624;
-}
-
-/* Lista de Jogos */
 .game-list {
-    margin: 20px;
-}
-
-.games {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .game-card {
     background-color: #1f1f1f;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
     width: 200px;
     text-align: center;
-    transition: transform 0.3s;
-}
-
-.game-card:hover {
-    transform: scale(1.05);
 }
 
 .game-card img {
     width: 100%;
     border-radius: 10px;
-}
-
-.game-info h3 {
-    margin: 10px 0;
-}
-
-.game-info button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #00c853;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.game-info button:hover {
-    background-color: #009624;
 }
 
 /* Rodapé */
