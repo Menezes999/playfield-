@@ -1,58 +1,38 @@
-// Exemplo básico de interatividade
+document.addEventListener("DOMContentLoaded", () => {
+  const userName = document.getElementById("user-name");
+  const userAvatar = document.getElementById("user-avatar");
+  const editProfile = document.getElementById("edit-profile");
 
-// Alterne entre as seções ao clicar nos botões do menu
-document.querySelectorAll("nav a").forEach(link => {
-  link.addEventListener("click", function (event) {
-    event.preventDefault(); // Previne o comportamento padrão de rolagem
-    const targetSection = document.querySelector(this.getAttribute("href"));
+  // Verifica se há dados armazenados localmente
+  const storedName = localStorage.getItem("playfield-user-name");
+  const storedAvatar = localStorage.getItem("playfield-user-avatar");
 
-    // Esconde todas as seções
-    document.querySelectorAll("main section").forEach(section => {
-      section.style.display = "none";
-    });
+  if (storedName) {
+    userName.textContent = storedName;
+    userAvatar.textContent = storedName.charAt(0).toUpperCase();
+  }
 
-    // Mostra a seção alvo
-    if (targetSection) {
-      targetSection.style.display = "block";
+  if (storedAvatar) {
+    userAvatar.style.backgroundImage = `url(${storedAvatar})`;
+    userAvatar.style.backgroundSize = "cover";
+    userAvatar.style.color = "transparent";
+  }
+
+  // Editar perfil
+  editProfile.addEventListener("click", () => {
+    const name = prompt("Digite seu nome:");
+    if (name) {
+      localStorage.setItem("playfield-user-name", name);
+      userName.textContent = name;
+      userAvatar.textContent = name.charAt(0).toUpperCase();
+    }
+
+    const avatar = prompt("Insira a URL da sua foto de avatar:");
+    if (avatar) {
+      localStorage.setItem("playfield-user-avatar", avatar);
+      userAvatar.style.backgroundImage = `url(${avatar})`;
+      userAvatar.style.backgroundSize = "cover";
+      userAvatar.style.color = "transparent";
     }
   });
 });
-
-// Inicializa exibindo somente a seção "Loja"
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("main section").forEach((section, index) => {
-    section.style.display = index === 0 ? "block" : "none";
-  });
-});
-
-// Adiciona funcionalidade ao botão "Jogar" (exemplo)
-document.addEventListener("click", event => {
-  if (event.target.classList.contains("play-button")) {
-    const gameName = event.target.dataset.gameName;
-    alert(`Iniciando o jogo: ${gameName}`);
-  }
-});
-
-// Exemplo de preenchimento dinâmico da loja
-const games = [
-  { name: "Jogo 1", price: "R$59,99", image: "https://via.placeholder.com/200" },
-  { name: "Jogo 2", price: "R$79,99", image: "https://via.placeholder.com/200" },
-  { name: "Jogo 3", price: "R$99,99", image: "https://via.placeholder.com/200" }
-];
-
-function loadStore() {
-  const storeGrid = document.querySelector(".game-grid");
-  games.forEach(game => {
-    const gameCard = document.createElement("div");
-    gameCard.className = "game-card";
-    gameCard.innerHTML = `
-      <img src="${game.image}" alt="${game.name}">
-      <h3>${game.name}</h3>
-      <p>${game.price}</p>
-      <button class="play-button" data-game-name="${game.name}">Comprar</button>
-    `;
-    storeGrid.appendChild(gameCard);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadStore);
