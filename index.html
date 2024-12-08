@@ -17,48 +17,43 @@
             <a href="#library">Biblioteca</a>
             <a href="#profile">Perfil</a>
         </nav>
-        <button id="toggle-theme" class="theme-button">🌙</button>
+        <button id="toggle-theme" class="theme-toggle">🌙</button>
     </header>
 
     <!-- Banner Principal -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Bem-vindo à PlayField</h1>
-            <p>Explore os melhores jogos, promoções incríveis e muito mais!</p>
-            <button class="cta-button">Comece Agora</button>
-        </div>
+        <h1>Bem-vindo à PlayField</h1>
+        <p>Explore, jogue e divirta-se com milhares de títulos incríveis!</p>
+        <button class="cta-button">Descubra Agora</button>
     </section>
 
     <!-- Destaques -->
-    <section class="games-section" id="games">
+    <section id="games" class="games-section">
         <h2>Destaques</h2>
-        <div class="game-cards">
+        <div class="game-grid">
             <div class="game-card">
                 <img src="https://placehold.co/300x200" alt="Jogo 1">
-                <div class="game-info">
-                    <h3>Jogo 1</h3>
-                    <p>Aventura emocionante para você explorar.</p>
-                    <button>Ver Mais</button>
-                </div>
+                <h3>Jogo 1</h3>
+                <p>Aventura incrível para explorar mundos.</p>
             </div>
             <div class="game-card">
                 <img src="https://placehold.co/300x200" alt="Jogo 2">
-                <div class="game-info">
-                    <h3>Jogo 2</h3>
-                    <p>Desafios incríveis aguardam.</p>
-                    <button>Ver Mais</button>
-                </div>
+                <h3>Jogo 2</h3>
+                <p>Desafios únicos para testar suas habilidades.</p>
+            </div>
+            <div class="game-card">
+                <img src="https://placehold.co/300x200" alt="Jogo 3">
+                <h3>Jogo 3</h3>
+                <p>Junte-se à comunidade em aventuras épicas.</p>
             </div>
         </div>
     </section>
 
     <!-- Registro/Login -->
-    <section class="auth-section" id="profile">
-        <h2>Entre na sua Conta</h2>
-        <form id="login-form">
-            <label for="username">Nome:</label>
-            <input type="text" id="username" placeholder="Digite seu nome" required>
-            <label for="profile-pic">Foto de Perfil (opcional):</label>
+    <section id="profile" class="auth-section">
+        <h2>Faça Login ou Crie uma Conta</h2>
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Nome" required>
             <input type="file" id="profile-pic" accept="image/*">
             <button type="submit">Entrar</button>
         </form>
