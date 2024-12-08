@@ -1,66 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField</title>
+    <title>PlayField - Sua loja de jogos online</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header class="header">
-        <div class="logo">PlayField</div>
-        <nav class="navbar">
-            <a href="#home">Início</a>
-            <a href="#games">Jogos</a>
-            <a href="#library">Biblioteca</a>
-            <a href="#profile">Perfil</a>
-        </nav>
-        <button id="toggle-theme" class="theme-toggle">🌙</button>
-    </header>
-
-    <!-- Banner Principal -->
-    <section class="hero">
-        <h1>Bem-vindo à PlayField</h1>
-        <p>Explore, jogue e divirta-se com milhares de títulos incríveis!</p>
-        <button class="cta-button">Descubra Agora</button>
-    </section>
-
-    <!-- Destaques -->
-    <section id="games" class="games-section">
-        <h2>Destaques</h2>
-        <div class="game-grid">
-            <div class="game-card">
-                <img src="https://placehold.co/300x200" alt="Jogo 1">
-                <h3>Jogo 1</h3>
-                <p>Aventura incrível para explorar mundos.</p>
-            </div>
-            <div class="game-card">
-                <img src="https://placehold.co/300x200" alt="Jogo 2">
-                <h3>Jogo 2</h3>
-                <p>Desafios únicos para testar suas habilidades.</p>
-            </div>
-            <div class="game-card">
-                <img src="https://placehold.co/300x200" alt="Jogo 3">
-                <h3>Jogo 3</h3>
-                <p>Junte-se à comunidade em aventuras épicas.</p>
-            </div>
+    <header class="bg-dark text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="logo">PlayField</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Início</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Catálogo</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Carrinho</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Login</a></li>
+                </ul>
+            </nav>
         </div>
-    </section>
-
-    <!-- Registro/Login -->
-    <section id="profile" class="auth-section">
-        <h2>Faça Login ou Crie uma Conta</h2>
-        <form id="auth-form">
-            <input type="text" id="username" placeholder="Nome" required>
-            <input type="file" id="profile-pic" accept="image/*">
-            <button type="submit">Entrar</button>
-        </form>
-    </section>
-
-    <!-- Rodapé -->
-    <footer class="footer">
+    </header>
+    <main class="container my-5">
+        <div class="text-center">
+            <h2>Bem-vindo ao PlayField</h2>
+            <p>Explore os melhores jogos, ofertas e novidades em um só lugar.</p>
+            <a href="#" class="btn btn-primary">Ver Catálogo</a>
+        </div>
+    </main>
+    <footer class="bg-dark text-center text-white py-3">
         <p>&copy; 2024 PlayField. Todos os direitos reservados.</p>
     </footer>
 </body>
