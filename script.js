@@ -1,19 +1,29 @@
-// Alternar Tema Claro/Escuro
-const themeButton = document.getElementById("toggle-theme");
-
-themeButton.addEventListener("click", () => {
+// Alternar Tema
+document.getElementById("toggle-theme").addEventListener("click", () => {
     document.body.classList.toggle("light-theme");
-    themeButton.textContent =
-        document.body.classList.contains("light-theme") ? "🌞" : "🌙";
+    const themeButton = document.getElementById("toggle-theme");
+    themeButton.textContent = document.body.classList.contains("light-theme")
+        ? "🌞"
+        : "🌙";
 });
 
-// Dados de Usuário
-function loadUserData() {
-    const userName = localStorage.getItem("userName");
-    if (userName) {
-        const userSection = document.querySelector("#profile");
-        userSection.textContent = `Bem-vindo, ${userName}`;
-    }
-}
+// Login e Registro
+document.getElementById("login-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const profilePic = document.getElementById("profile-pic").files[0];
 
-loadUserData();
+    localStorage.setItem("username", username);
+    if (profilePic) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            localStorage.setItem("profilePic", reader.result);
+        };
+        reader.readAsDataURL(profilePic);
+    } else {
+        localStorage.setItem("profilePic", "");
+    }
+
+    alert(`Bem-vindo, ${username}!`);
+    window.location.href = "#library";
+});
