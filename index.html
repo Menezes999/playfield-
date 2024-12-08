@@ -7,58 +7,64 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <!-- Cabeçalho -->
     <header>
         <div class="logo">PlayField</div>
         <nav class="nav">
-            <a href="#" class="nav-link">Loja</a>
-            <a href="#" class="nav-link">Biblioteca</a>
-            <a href="#" class="nav-link">Comunidade</a>
-            <a href="#" class="nav-link">Galáxy</a>
+            <a href="#">Início</a>
+            <a href="#">Loja</a>
+            <a href="#">Jogos</a>
+            <a href="#">Comunidade</a>
+            <a href="#">Perfil</a>
         </nav>
         <div class="user-info">
             <div class="avatar" id="avatar">P</div>
-            <span id="user-name">Bem-vindo, usuário!</span>
+            <span id="user-name">Conecte-se</span>
         </div>
     </header>
 
-    <!-- Carrossel de Destaques -->
-    <section class="carousel">
-        <div class="carousel-item">
-            <img src="https://store.steampowered.com/public/images/steamdeck/steamdeck_white_main.jpg" alt="Steam Deck" class="carousel-img">
-            <div class="carousel-info">
-                <h2>Steam Deck</h2>
-                <p>Os jogos em qualquer lugar</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg?t=1678238381" alt="Hunt: Showdown" class="carousel-img">
-            <div class="carousel-info">
-                <h2>Hunt: Showdown 1896</h2>
-                <p>Recomendado por jogar jogos com os marcadores</p>
-            </div>
-        </div>
-    </section>
+    <!-- Seção Principal -->
+    <main class="main-section">
+        <section class="intro">
+            <h1>Bem-vindo ao PlayField</h1>
+            <p>A plataforma onde você encontra os melhores jogos e interage com a comunidade!</p>
+            <button class="btn-login" onclick="showLogin()">Entrar</button>
+            <button class="btn-register" onclick="showRegister()">Cadastrar</button>
+        </section>
 
-    <!-- Barra Lateral -->
-    <aside class="sidebar">
-        <h3>Marcos e Recomendações</h3>
-        <ul>
-            <li><a href="#">Crime</a></li>
-            <li><a href="#">Zumbis</a></li>
-            <li><a href="#">Simulador Automobilístico</a></li>
-            <li><a href="#">Tiro em Primeira Pessoa</a></li>
-            <li><a href="#">Tiro</a></li>
-        </ul>
-    </aside>
+        <!-- Banner -->
+        <section class="banner">
+            <img src="https://www.roblox.com/asset-thumbnail/image?assetId=6043121184&width=420&height=420" alt="Banner" class="banner-img">
+        </section>
+    </main>
+
+    <!-- Modal Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <input type="text" id="login-name" placeholder="Nome de usuário">
+            <input type="password" id="login-password" placeholder="Senha">
+            <button onclick="loginUser()">Entrar</button>
+            <button class="close" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal Cadastro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <h2>Cadastrar</h2>
+            <input type="text" id="register-name" placeholder="Nome de usuário">
+            <input type="password" id="register-password" placeholder="Senha">
+            <button onclick="registerUser()">Cadastrar</button>
+            <button class="close" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
 
     <!-- Rodapé -->
     <footer>
         <p>&copy; 2024 PlayField. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
