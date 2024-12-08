@@ -1,24 +1,22 @@
-// Exibir o modal de login
+// Mostrar Modal
 function showLogin() {
     document.getElementById('login-modal').style.display = 'flex';
 }
 
-// Exibir o modal de registro
 function showRegister() {
     document.getElementById('register-modal').style.display = 'flex';
 }
 
-// Fechar o modal
+// Fechar Modal
 function closeModal() {
     document.getElementById('login-modal').style.display = 'none';
     document.getElementById('register-modal').style.display = 'none';
 }
 
-// Login de usuário
+// Login
 function loginUser() {
     const username = document.getElementById('login-name').value;
-    const password = document.getElementById('login-password').value;
-    if (username && password) {
+    if (username) {
         localStorage.setItem('userName', username);
         document.getElementById('user-name').textContent = username;
         document.getElementById('avatar').textContent = username.charAt(0).toUpperCase();
@@ -26,19 +24,18 @@ function loginUser() {
     }
 }
 
-// Registro de novo usuário
+// Registro
 function registerUser() {
     const username = document.getElementById('register-name').value;
-    const password = document.getElementById('register-password').value;
-    if (username && password) {
+    if (username) {
         localStorage.setItem('userName', username);
         document.getElementById('user-name').textContent = username;
         document.getElementById('avatar').textContent = username.charAt(0).toUpperCase();
-        closeModal();
+        window.location.href = 'games.html';
     }
 }
 
-// Carregar dados do usuário
+// Carregar Dados
 function loadUserData() {
     const userName = localStorage.getItem('userName');
     if (userName) {
