@@ -13,67 +13,61 @@
         <nav class="nav">
             <a href="#">Início</a>
             <a href="#">Jogos</a>
+            <a href="#">Categorias</a>
             <a href="#">Loja</a>
-            <a href="#">Comunidade</a>
         </nav>
-        <div class="user-info" id="user-info">
+        <div class="user-info">
             <div class="avatar" id="avatar">P</div>
-            <span id="user-name">Faça login</span>
+            <span id="user-name">Entrar</span>
         </div>
     </header>
 
-    <!-- Seção Principal -->
-    <main class="main">
-        <section class="intro">
-            <h1>Bem-vindo ao PlayField</h1>
-            <p>Descubra, jogue e conecte-se com amigos!</p>
-            <div class="buttons">
-                <button class="btn-login" onclick="showLogin()">Entrar</button>
-                <button class="btn-register" onclick="showRegister()">Cadastrar</button>
-            </div>
-        </section>
-
-        <!-- Destaques -->
-        <section class="highlights">
-            <h2>Jogos Populares</h2>
-            <div class="game-grid">
-                <div class="game">
-                    <img src="https://placehold.co/200x200" alt="Jogo 1">
-                    <p>Jogo 1</p>
-                </div>
-                <div class="game">
-                    <img src="https://placehold.co/200x200" alt="Jogo 2">
-                    <p>Jogo 2</p>
-                </div>
-                <div class="game">
-                    <img src="https://placehold.co/200x200" alt="Jogo 3">
-                    <p>Jogo 3</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Modal Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <h2>Login</h2>
-            <input type="text" id="login-name" placeholder="Nome de usuário">
-            <input type="password" id="login-password" placeholder="Senha">
-            <button onclick="loginUser()">Entrar</button>
-            <button class="close" onclick="closeModal()">Fechar</button>
+    <!-- Carrossel de Destaque -->
+    <section class="carousel">
+        <div class="carousel-item">
+            <img src="https://placehold.co/800x300" alt="Destaque 1">
+            <h2>Jogo em Destaque</h2>
         </div>
-    </div>
+    </section>
 
-    <!-- Modal Cadastro -->
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <h2>Cadastrar</h2>
-            <input type="text" id="register-name" placeholder="Nome de usuário">
-            <input type="password" id="register-password" placeholder="Senha">
-            <button onclick="registerUser()">Cadastrar</button>
-            <button class="close" onclick="closeModal()">Fechar</button>
+    <!-- Categorias -->
+    <section class="categories">
+        <h2>Categorias</h2>
+        <div class="category-buttons">
+            <button>Ação</button>
+            <button>Aventura</button>
+            <button>RPG</button>
+            <button>Estratégia</button>
         </div>
-    </div>
+    </section>
+
+    <!-- Lista de Jogos -->
+    <section class="game-list">
+        <h2>Jogos Populares</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://placehold.co/200x200" alt="Jogo 1">
+                <div class="game-info">
+                    <h3>Jogo 1</h3>
+                    <button>Ver mais</button>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://placehold.co/200x200" alt="Jogo 2">
+                <div class="game-info">
+                    <h3>Jogo 2</h3>
+                    <button>Ver mais</button>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://placehold.co/200x200" alt="Jogo 3">
+                <div class="game-info">
+                    <h3>Jogo 3</h3>
+                    <button>Ver mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Rodapé -->
     <footer class="footer">
