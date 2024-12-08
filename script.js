@@ -8,12 +8,13 @@ document.getElementById("toggle-theme").addEventListener("click", () => {
 });
 
 // Login e Registro
-document.getElementById("login-form").addEventListener("submit", (e) => {
+document.getElementById("auth-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value;
     const profilePic = document.getElementById("profile-pic").files[0];
 
     localStorage.setItem("username", username);
+
     if (profilePic) {
         const reader = new FileReader();
         reader.onload = () => {
