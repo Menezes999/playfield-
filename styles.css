@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #1d1d1d;
+    background-color: #121212;
     color: #fff;
 }
 
@@ -11,20 +11,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: #121212;
+    padding: 15px 30px;
+    background-color: #1f1f1f;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #00bcd4;
+    color: #00c853;
 }
 
 .nav a {
     color: #fff;
     margin-left: 20px;
     text-decoration: none;
+    font-size: 16px;
 }
 
 .user-info {
@@ -35,7 +39,7 @@ body {
 .avatar {
     width: 40px;
     height: 40px;
-    background-color: #00bcd4;
+    background-color: #00c853;
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -46,96 +50,95 @@ body {
     font-weight: bold;
 }
 
-/* Seção Principal */
-.main {
+/* Carrossel */
+.carousel {
     text-align: center;
-    padding: 50px 20px;
+    margin: 20px 0;
 }
 
-.intro h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    color: #00bcd4;
+.carousel-item img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
 }
 
-.buttons button {
+.carousel h2 {
+    margin-top: 10px;
+}
+
+/* Categorias */
+.categories {
+    margin: 20px;
+    text-align: center;
+}
+
+.category-buttons button {
     margin: 10px;
-    padding: 15px 30px;
+    padding: 10px 20px;
     border: none;
-    background-color: #00bcd4;
+    background-color: #00c853;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.buttons button:hover {
-    background-color: #008c9e;
+.category-buttons button:hover {
+    background-color: #009624;
 }
 
-/* Destaques */
-.highlights {
-    margin: 50px 0;
+/* Lista de Jogos */
+.game-list {
+    margin: 20px;
 }
 
-.highlights h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.game-grid {
+.games {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.game {
-    text-align: center;
-}
-
-.game img {
-    width: 200px;
-    height: 200px;
+.game-card {
+    background-color: #1f1f1f;
     border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
     transition: transform 0.3s;
 }
 
-.game img:hover {
+.game-card:hover {
     transform: scale(1.05);
 }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+.game-card img {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: #2c2c2c;
-    padding: 30px;
     border-radius: 10px;
-    text-align: center;
 }
 
-.modal input {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
+.game-info h3 {
+    margin: 10px 0;
+}
+
+.game-info button {
+    padding: 10px 20px;
     border: none;
+    background-color: #00c853;
+    color: #fff;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.game-info button:hover {
+    background-color: #009624;
 }
 
 /* Rodapé */
 .footer {
     text-align: center;
     padding: 10px;
-    background-color: #121212;
+    background-color: #1f1f1f;
+    margin-top: 20px;
 }
