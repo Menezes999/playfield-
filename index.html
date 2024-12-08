@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField - Sua Loja de Jogos</title>
+    <title>PlayField</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -12,43 +12,49 @@
     <header class="header">
         <div class="logo">PlayField</div>
         <nav class="navbar">
-            <a href="#home">Home</a>
+            <a href="#home">Início</a>
+            <a href="#games">Jogos</a>
             <a href="#library">Biblioteca</a>
-            <a href="#store">Loja</a>
             <a href="#profile">Perfil</a>
         </nav>
         <button id="toggle-theme" class="theme-button">🌙</button>
     </header>
 
     <!-- Banner Principal -->
-    <section class="banner">
-        <h1>Descubra o Melhor dos Jogos</h1>
-        <p>Promoções e lançamentos aguardam por você!</p>
-        <button class="cta-button">Explore Agora</button>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bem-vindo à PlayField</h1>
+            <p>Explore os melhores jogos, promoções incríveis e muito mais!</p>
+            <button class="cta-button">Comece Agora</button>
+        </div>
     </section>
 
     <!-- Destaques -->
-    <section class="highlights" id="library">
-        <h2>Jogos Populares</h2>
+    <section class="games-section" id="games">
+        <h2>Destaques</h2>
         <div class="game-cards">
             <div class="game-card">
-                <img src="https://placehold.co/200x200" alt="Jogo 1">
-                <h3>Jogo 1</h3>
-                <p>Descrição curta e atraente.</p>
-                <button>Ver Mais</button>
+                <img src="https://placehold.co/300x200" alt="Jogo 1">
+                <div class="game-info">
+                    <h3>Jogo 1</h3>
+                    <p>Aventura emocionante para você explorar.</p>
+                    <button>Ver Mais</button>
+                </div>
             </div>
             <div class="game-card">
-                <img src="https://placehold.co/200x200" alt="Jogo 2">
-                <h3>Jogo 2</h3>
-                <p>Uma breve introdução do jogo.</p>
-                <button>Ver Mais</button>
+                <img src="https://placehold.co/300x200" alt="Jogo 2">
+                <div class="game-info">
+                    <h3>Jogo 2</h3>
+                    <p>Desafios incríveis aguardam.</p>
+                    <button>Ver Mais</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Registro/Login -->
-    <section class="auth" id="profile">
-        <h2>Bem-vindo à PlayField</h2>
+    <section class="auth-section" id="profile">
+        <h2>Entre na sua Conta</h2>
         <form id="login-form">
             <label for="username">Nome:</label>
             <input type="text" id="username" placeholder="Digite seu nome" required>
