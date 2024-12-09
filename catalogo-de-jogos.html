@@ -229,8 +229,8 @@
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Exibe a primeira letra do nome -->
-        <div class="welcome-message" id="welcome-message">Bem-vindo, <span id="user-name">Usuário</span></div>
+        <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Inicial do nome do usuário -->
+        <div class="welcome-message" id="welcome-message">Bem-vindo, <span id="user-name">Usuário</span></div> <!-- Nome completo do usuário -->
     </header>
 
     <div class="banner">
@@ -352,7 +352,7 @@
             profile.style.backgroundImage = imgSrc;
             profile.style.backgroundSize = 'cover';
             profile.style.backgroundPosition = 'center';
-            profile.textContent = '';
+            profile.textContent = name[0].toUpperCase(); // Show first letter of the name
             profile.style.display = 'block'; // Show profile image after saving
             userName.textContent = name;
             welcomeMessage.textContent = `Bem-vindo, ${name}`; // Update welcome message
