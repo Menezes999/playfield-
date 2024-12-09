@@ -37,14 +37,22 @@
             font-weight: bold;
             border-radius: 50%;
             cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 15px;
+            position: relative;
         }
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .profile .default-img {
+            z-index: 1; /* Foto padrão atrás da foto do usuário */
+        }
+        .profile .uploaded-img {
+            z-index: 2; /* Foto carregada na frente */
         }
         .welcome-message {
             position: absolute;
@@ -229,8 +237,11 @@
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Inicial do nome do usuário -->
-        <div class="welcome-message" id="welcome-message">Bem-vindo, <span id="user-name"></span></div> <!-- Nome completo do usuário -->
+        <div class="profile" id="profile" onclick="openSidebar()">
+            <img src="semfoto.jpg" class="default-img" alt="Foto Padrão"> <!-- Foto padrão -->
+            <img src="" class="uploaded-img" alt="Foto Carregada" style="display: none;"> <!-- Foto carregada, inicialmente oculta -->
+        </div>
+        <div class="welcome-message" id="welcome-message">Bem-vindo</div>
     </header>
 
     <div class="banner">
@@ -311,7 +322,6 @@
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
         const welcomeMessage = document.getElementById('welcome-message');
-        const userName = document.getElementById('user-name');
         let profileImageSaved = false;
 
         function openSidebar() {
@@ -335,42 +345,30 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    profile.style.backgroundImage = `url(${reader.result})`;
-                    profile.style.backgroundSize = 'cover';
-                    profile.style.backgroundPosition = 'center';
-                    profile.textContent = '';
+                    const uploadedImg = profile.querySelector('.uploaded-img');
+                    uploadedImg.src = reader.result;
+                    uploadedImg.style.display = 'block';
+                    profile.querySelector('.default-img').style.display = 'none'; // Esconde a foto padrão
                 };
                 reader.readAsDataURL(file);
             }
         }
 
         function saveChanges() {
-            const imgSrc = profile.style.backgroundImage || 'none';
-            const name = userName.textContent || 'Usuário'; // Use name in profile
+            const uploadedImg = profile.querySelector('.uploaded-img');
+            const imgSrc = uploadedImg.style.display === 'none' ? 'semfoto.png' : uploadedImg.src;
             localStorage.setItem('profileImage', imgSrc);
-            localStorage.setItem('userName', name); // Save name locally
-            profile.style.backgroundImage = imgSrc;
-            profile.style.backgroundSize = 'cover';
-            profile.style.backgroundPosition = 'center';
-            profile.textContent = name[0].toUpperCase(); // Show first letter of the name
-            profile.style.display = 'block'; // Show profile image after saving
-            userName.textContent = name;
-            welcomeMessage.textContent = `Bem-vindo, ${name}`; // Update welcome message
+            profile.style.backgroundImage = `url(${imgSrc})`;
+            welcomeMessage.textContent = `Bem-vindo`; // Mensagem de boas-vindas simplificada
             closePopup();
-            profileImageSaved = true; // Indicate profile image has been saved
         }
 
         window.onload = () => {
             const savedProfileImage = localStorage.getItem('profileImage');
-            const savedUserName = localStorage.getItem('userName');
-            if (savedProfileImage && savedUserName) {
-                profile.style.backgroundImage = savedProfileImage;
-                profile.style.backgroundSize = 'cover';
-                profile.style.backgroundPosition = 'center';
-                profile.textContent = savedUserName[0].toUpperCase(); // Show first letter of the name
-                profile.style.display = 'block'; // Show saved profile image on load
-                userName.textContent = savedUserName;
-                welcomeMessage.textContent = `Bem-vindo, ${savedUserName}`; // Show saved user name
+            if (savedProfileImage) {
+                profile.querySelector('.uploaded-img').src = savedProfileImage;
+                profile.querySelector('.uploaded-img').style.display = 'block';
+                profile.querySelector('.default-img').style.display = 'none'; // Esconde a foto padrão
             }
         }
     </script>
