@@ -17,6 +17,10 @@
             align-items: center;
             padding: 1rem;
             background-color: #111;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         .logo {
             width: 120px;
@@ -103,6 +107,10 @@
         .drawer button:hover {
             background-color: #ddd;
         }
+        main {
+            padding-top: 70px; /* Para não sobrepor o cabeçalho fixo */
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +125,8 @@
     </header>
 
     <main>
-        <!-- Conteúdo Principal -->
+        <h2>Conteúdo do Site</h2>
+        <p>Adicione seu conteúdo aqui.</p>
     </main>
 
     <div class="drawer" id="drawer">
