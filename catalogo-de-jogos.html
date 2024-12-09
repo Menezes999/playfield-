@@ -8,72 +8,223 @@
         /* Estilos Gerais */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1c1c1c;
             color: #fff;
+            line-height: 1.6;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
+            padding: 1rem 2rem;
             background-color: #111;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            width: 120px;
+            width: 140px;
+            height: auto;
         }
 
         .profile-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+        }
+
+        .welcome {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #bbb;
         }
 
         .profile {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: #333;
             border-radius: 50%;
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: all 0.3s ease;
         }
 
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* Inicialmente a imagem é invisível */
         }
 
-        .profile .default-image {
+        .profile:hover {
+            transform: scale(1.05);
+        }
+
+        /* Slideshow */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: #444;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
-        .profile .default-image::before {
-            content: "Enviar Foto";
+        .banner img.active {
+            opacity: 1;
+        }
+
+        .indicators {
             position: absolute;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
         }
 
-        .profile input[type="file"] {
-            display: none; /* Oculta o input de arquivo */
+        .indicator {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transition: opacity 0.3s;
+        }
+
+        .indicator.active {
+            opacity: 1;
+            background-color: #fff;
+        }
+
+        /* Jogos em Destaque */
+        main {
+            padding: 2rem;
+        }
+
+        h2 {
+            text-align: left;
+            font-size: 2rem;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+
+        .games {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .game-card {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #5c6bc0;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .game-card button:hover {
+            background-color: #3f4fb1;
+        }
+
+        /* Gaveta Lateral */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: #222;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            padding: 1.5rem;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .drawer.open {
+            right: 0;
+        }
+
+        .drawer h3 {
+            font-size: 1.3rem;
+            margin: 0 0 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .drawer input[type="file"] {
+            display: none;
+        }
+
+        .drawer button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #5c6bc0;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .drawer button:hover {
+            background-color: #3f4fb1;
+        }
+
+        /* Efeitos */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
     </style>
@@ -83,33 +234,89 @@
         <img src="logo.png" alt="PlayField Logo" class="logo">
         <div class="profile-section">
             <p class="welcome">Bem-vindo</p>
-            <div class="profile" id="profile" onclick="document.getElementById('fileInput').click();">
-                <div class="default-image">
-                    <img id="profile-pic" src="semfoto.jpg" alt="Foto de Perfil">
-                </div>
-                <input type="file" id="fileInput" accept="image/*" onchange="updateProfilePhoto()">
+            <div class="profile" id="profile" onclick="toggleDrawer()">
+                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
             </div>
         </div>
     </header>
 
-    <script>
-        const profilePic = document.getElementById('profile-pic');
-        const defaultImage = document.querySelector('.default-image');
-        const fileInput = document.getElementById('fileInput');
+    <div class="banner" id="banner">
+        <img src="banner1.png" alt="Banner 1" class="active">
+        <img src="banner2.png" alt="Banner 2">
+        <img src="banner3.png" alt="Banner 3">
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
+    </div>
 
-        // Função para atualizar a foto de perfil
-        function updateProfilePhoto() {
-            const file = fileInput.files[0];
+    <main>
+        <h2>Jogos em Destaque</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="jogo1.jpg" alt="Jogo 1">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo2.jpg" alt="Jogo 2">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo3.jpg" alt="Jogo 3">
+                <button>Jogar Agora</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="drawer" id="drawer">
+        <h3>Editar Perfil</h3>
+        <input type="file" id="upload-photo" accept="image/*">
+        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+        <button onclick="toggleDrawer()">Fechar</button>
+    </div>
+
+    <script>
+        const drawer = document.getElementById('drawer');
+        const profilePic = document.getElementById('profile-pic');
+        const uploadPhotoInput = document.getElementById('upload-photo');
+
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+        }
+
+        function saveProfilePhoto() {
+            const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePic.src = e.target.result;
-                    profilePic.style.display = 'block'; // Exibe a nova foto
-                    defaultImage.style.display = 'none'; // Esconde o fundo de "Enviar Foto"
+                reader.onload = () => {
+                    localStorage.setItem('profilePhoto', reader.result);
+                    profilePic.src = reader.result;
                 };
                 reader.readAsDataURL(file);
             }
+            toggleDrawer();
         }
+
+        const savedPhoto = localStorage.getItem('profilePhoto');
+        if (savedPhoto) {
+            profilePic.src = savedPhoto;
+        }
+
+        // Slideshow com fade-out
+        const banners = document.querySelectorAll('.banner img');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+
+        function changeBanner() {
+            banners[currentIndex].classList.remove('active');
+            indicators[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % banners.length;
+            banners[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeBanner, 5000);
     </script>
 </body>
 </html>
