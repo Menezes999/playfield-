@@ -308,6 +308,16 @@
         const profilePic = document.getElementById('profile-pic');
         const previewImg = document.getElementById('preview-img');
         const previewContainer = document.getElementById('preview-container');
+        const uploadPhoto = document.getElementById('upload-photo');
+        
+        // Carregar imagem de perfil salva no localStorage
+        window.onload = () => {
+            const savedImage = localStorage.getItem('profilePic');
+            if (savedImage) {
+                profilePic.src = savedImage;
+                previewImg.src = savedImage;
+            }
+        };
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
@@ -328,6 +338,10 @@
         function saveProfilePhoto() {
             const newImageSrc = previewImg.src;
             profilePic.src = newImageSrc;
+
+            // Salvar no localStorage
+            localStorage.setItem('profilePic', newImageSrc);
+
             toggleDrawer(); // Fechar gaveta
         }
 
