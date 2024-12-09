@@ -37,33 +37,71 @@
             font-weight: bold;
             border-radius: 50%;
             cursor: pointer;
+            overflow: hidden;
         }
         .profile img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            object-fit: cover;
         }
         .sidebar {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
+            right: -350px;
+            width: 350px;
             height: 100%;
-            background-color: #111;
+            background-color: #222;
             color: #fff;
             box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
-            transition: 0.3s;
-            padding: 1rem;
+            transition: 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
         }
         .sidebar.open {
             right: 0;
         }
-        .sidebar h2 {
-            margin-top: 0;
+        .sidebar-header {
+            padding: 1rem;
+            background-color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #444;
         }
-        .sidebar input[type="file"] {
-            display: block;
-            margin-top: 1rem;
+        .sidebar-header h2 {
+            margin: 0;
+        }
+        .sidebar-content {
+            flex-grow: 1;
+            padding: 1rem;
+        }
+        .sidebar-content .menu-item {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background-color: #333;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .sidebar-content .menu-item:hover {
+            background-color: #444;
+        }
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid #444;
+            text-align: center;
+        }
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .game-section {
             padding: 1rem;
@@ -99,16 +137,27 @@
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile">
-            <!-- Letra inicial ou imagem do usuário -->
-        </div>
+        <div class="profile" id="profile"></div>
     </header>
 
+    <div class="banner">
+        <img src="https://via.placeholder.com/1500x300" alt="Banner">
+    </div>
+
     <div class="sidebar" id="sidebar">
-        <h2>Meu Perfil</h2>
-        <p id="userName"></p>
-        <input type="file" id="profilePic" accept="image/*">
-        <button onclick="closeSidebar()">Fechar</button>
+        <div class="sidebar-header">
+            <h2>Meu Perfil</h2>
+            <button onclick="closeSidebar()" style="background: none; color: #fff; border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="menu-item">Editar Perfil</div>
+            <div class="menu-item">Meus Jogos</div>
+            <div class="menu-item">Configurações</div>
+            <div class="menu-item">Sair</div>
+        </div>
+        <div class="sidebar-footer">
+            <small>© 2024 PlayField</small>
+        </div>
     </div>
 
     <main class="game-section">
@@ -122,25 +171,16 @@
                 <img src="https://via.placeholder.com/200x120" alt="Jogo 2">
                 <h3>Jogo 2</h3>
             </div>
+        </div>
+        <h2>Novos Lançamentos</h2>
+        <div class="game-row">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x120" alt="Jogo 3">
                 <h3>Jogo 3</h3>
             </div>
-        </div>
-
-        <h2>Novos Lançamentos</h2>
-        <div class="game-row">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x120" alt="Jogo 4">
                 <h3>Jogo 4</h3>
-            </div>
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 5">
-                <h3>Jogo 5</h3>
-            </div>
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 6">
-                <h3>Jogo 6</h3>
             </div>
         </div>
     </main>
@@ -148,38 +188,12 @@
     <script>
         const profileDiv = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
-        const userName = localStorage.getItem('playfieldUserName');
-        const storedProfilePic = localStorage.getItem('profilePic');
+        const userName = localStorage.getItem('playfieldUserName') || "U";
 
-        if (userName) {
-            profileDiv.textContent = userName.charAt(0).toUpperCase();
-        }
-
-        if (storedProfilePic) {
-            const img = document.createElement('img');
-            img.src = storedProfilePic;
-            profileDiv.textContent = '';
-            profileDiv.appendChild(img);
-        }
+        profileDiv.textContent = userName.charAt(0).toUpperCase();
 
         profileDiv.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            document.getElementById('userName').textContent = `Nome: ${userName}`;
-        });
-
-        document.getElementById('profilePic').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    localStorage.setItem('profilePic', e.target.result);
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    profileDiv.textContent = '';
-                    profileDiv.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            }
+            sidebar.classList.add('open');
         });
 
         function closeSidebar() {
