@@ -37,9 +37,8 @@
             font-weight: bold;
             border-radius: 50%;
             cursor: pointer;
-            overflow: hidden;
             position: absolute;
-            top: 10px; /* Ajustado para subir a foto de perfil */
+            top: 10px;
             right: 15px;
         }
         .profile img {
@@ -49,7 +48,7 @@
         }
         .welcome-message {
             position: absolute;
-            top: 18px; /* Ajustado para alinhar melhor com a foto */
+            top: 18px;
             right: 70px;
             color: #fff;
             font-size: 1rem;
@@ -230,7 +229,7 @@
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Default profile initial -->
+        <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Exibe a primeira letra do nome -->
         <div class="welcome-message" id="welcome-message">Bem-vindo, <span id="user-name">Usuário</span></div>
     </header>
 
@@ -368,7 +367,7 @@
                 profile.style.backgroundImage = savedProfileImage;
                 profile.style.backgroundSize = 'cover';
                 profile.style.backgroundPosition = 'center';
-                profile.textContent = '';
+                profile.textContent = savedUserName[0].toUpperCase(); // Show first letter of the name
                 profile.style.display = 'block'; // Show saved profile image on load
                 userName.textContent = savedUserName;
                 welcomeMessage.textContent = `Bem-vindo, ${savedUserName}`; // Show saved user name
