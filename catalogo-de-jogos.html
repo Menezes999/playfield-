@@ -27,7 +27,7 @@
         }
 
         .logo {
-            width: 80px;
+            width: 140px;
             height: auto;
         }
 
@@ -224,7 +224,7 @@
         }
 
         .preview-image {
-            margin-top: 15px;
+            margin-bottom: 15px;
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -295,10 +295,10 @@
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <input type="file" id="upload-photo" accept="image/*" onchange="previewImage(event)">
         <div class="preview-image" id="preview-container">
             <img src="semfoto.jpg" id="preview-img" alt="Prévia">
         </div>
+        <input type="file" id="upload-photo" accept="image/*" onchange="previewImage(event)">
         <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
