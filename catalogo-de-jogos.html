@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField - Página Inicial</title>
+    <title>PlayField - Perfil</title>
     <style>
         body {
             margin: 0;
@@ -17,10 +17,6 @@
             align-items: center;
             padding: 1rem;
             background-color: #111;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
         }
         .logo {
             width: 120px;
@@ -46,6 +42,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .profile .initial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #555;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
         }
         .drawer {
             position: fixed;
@@ -107,123 +114,23 @@
         .drawer button:hover {
             background-color: #ddd;
         }
-        main {
-            padding-top: 120px; /* Ajustado para o cabeçalho fixo */
-            margin: 0;
-        }
-
-        /* Slideshow */
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 1s ease-in-out;
-        }
-
-        .slide {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .dots-container {
-            text-align: center;
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-            cursor: pointer;
-        }
-
-        .active {
-            background-color: #717171;
-        }
-
-        /* Jogos */
-        .game-category {
-            padding: 20px;
-        }
-
-        .games {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-        }
-
-        .game {
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 150px;
-            cursor: pointer;
-        }
-
-        .game img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
     <header>
         <img src="logo.png" alt="PlayField Logo" class="logo">
         <div class="profile-section">
-            <p class="welcome" id="welcome-text">Bem-vindo</p>
+            <p class="welcome" id="welcome">Bem-vindo</p>
             <div class="profile" id="profile" onclick="toggleDrawer()">
+                <!-- Foto de perfil ou inicial do nome -->
                 <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
+                <div class="initial" id="profile-initial"></div>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- Slideshow -->
-        <div class="slideshow-container">
-            <div class="slides" id="slideshow">
-                <div class="slide"><img src="banner1.png" alt="Banner 1"></div>
-                <div class="slide"><img src="banner2.png" alt="Banner 2"></div>
-                <div class="slide"><img src="banner3.png" alt="Banner 3"></div>
-            </div>
-            <div class="dots-container" id="dots-container"></div>
-        </div>
-
-        <!-- Jogos -->
-        <div class="game-category">
-            <h2>Jogos em Destaque</h2>
-            <div class="games" id="games-container">
-                <div class="game">
-                    <img src="game1.jpg" alt="Jogo 1">
-                    <p>Jogar Agora</p>
-                </div>
-                <div class="game">
-                    <img src="game2.jpg" alt="Jogo 2">
-                    <p>Jogar Agora</p>
-                </div>
-                <div class="game">
-                    <img src="game3.jpg" alt="Jogo 3">
-                    <p>Jogar Agora</p>
-                </div>
-            </div>
-        </div>
+        <!-- Conteúdo Principal -->
     </main>
 
     <div class="drawer" id="drawer">
@@ -241,44 +148,9 @@
         const profilePic = document.getElementById('profile-pic');
         const editProfilePic = document.getElementById('edit-profile-pic');
         const uploadPhotoInput = document.getElementById('upload-photo');
-        const welcomeText = document.getElementById('welcome-text');
+        const profileInitial = document.getElementById('profile-initial');
+        const welcomeText = document.getElementById('welcome');
 
-        // Slideshow
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots-container');
-
-        function showSlide(index) {
-            const totalSlides = slides.length;
-            if (index >= totalSlides) currentSlideIndex = 0;
-            if (index < 0) currentSlideIndex = totalSlides - 1;
-            
-            document.getElementById('slideshow').style.transform = `translateX(-${100 * currentSlideIndex}%)`;
-
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        function createDots() {
-            slides.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.classList.add('dot');
-                dot.addEventListener('click', () => showSlide(index));
-                dotsContainer.appendChild(dot);
-            });
-        }
-
-        function changeSlide() {
-            currentSlideIndex++;
-            showSlide(currentSlideIndex);
-        }
-
-        setInterval(changeSlide, 4000); // Troca de banner a cada 4 segundos
-        createDots();
-        showSlide(currentSlideIndex);
-
-        // Perfil
         function toggleDrawer() {
             drawer.classList.toggle('open');
         }
@@ -292,29 +164,36 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    // Exibir a foto carregada sobre a foto padrão
-                    const newImageSrc = reader.result;
-                    profilePic.src = newImageSrc;
-                    editProfilePic.src = newImageSrc;
-                    localStorage.setItem('profilePhoto', newImageSrc); // Salva a imagem no localStorage
+                    localStorage.setItem('profilePhoto', reader.result);
+                    profilePic.src = reader.result;
+                    editProfilePic.src = reader.result;
+                    profileInitial.style.display = 'none'; // Esconde a inicial
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        // Carregar foto de perfil do localStorage (se houver)
-        const storedProfilePhoto = localStorage.getItem('profilePhoto');
-        if (storedProfilePhoto) {
-            profilePic.src = storedProfilePhoto;
-            editProfilePic.src = storedProfilePhoto;
-        }
-
-        // Mostrar nome de usuário se houver no localStorage
+        // Carregar nome e foto de perfil
         const storedUserName = localStorage.getItem('userName');
+        const storedPhoto = localStorage.getItem('profilePhoto');
+        
         if (storedUserName) {
             welcomeText.textContent = `Bem-vindo, ${storedUserName}`;
+            // Exibir inicial do nome se não houver foto
+            const initial = storedUserName.charAt(0).toUpperCase();
+            if (!storedPhoto) {
+                profileInitial.textContent = initial;
+                profilePic.style.display = 'none';
+                profileInitial.style.display = 'flex';
+            }
         }
 
+        // Carregar foto de perfil salva
+        if (storedPhoto) {
+            profilePic.src = storedPhoto;
+            editProfilePic.src = storedPhoto;
+            profileInitial.style.display = 'none'; // Esconde a inicial
+        }
     </script>
 </body>
 </html>
