@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayField - Catálogo</title>
     <style>
-        /* Estilos principais */
+        /* Reset e estilos gerais */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: #f8f9fa;
+            color: #333;
         }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            background-color: #111;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -25,12 +26,13 @@
         header h1 {
             margin: 0;
             font-size: 1.5rem;
+            color: #555;
         }
         .profile {
             width: 40px;
             height: 40px;
-            background-color: #333;
-            color: #fff;
+            background-color: #ddd;
+            color: #555;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,15 +47,61 @@
             height: 100%;
             object-fit: cover;
         }
+        /* Slideshow */
+        .slideshow {
+            position: relative;
+            max-width: 100%;
+            height: 200px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide:nth-child(1) {
+            background-image: url('https://via.placeholder.com/800x200?text=Banner+1');
+        }
+        .slide:nth-child(2) {
+            background-image: url('https://via.placeholder.com/800x200?text=Banner+2');
+        }
+        .slide:nth-child(3) {
+            background-image: url('https://via.placeholder.com/800x200?text=Banner+3');
+        }
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: -25px;
+            position: relative;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active {
+            background-color: #555;
+        }
+        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
             right: -350px;
             width: 350px;
             height: 100%;
-            background-color: #222;
-            color: #fff;
-            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            color: #333;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
             transition: 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
@@ -63,17 +111,19 @@
         }
         .sidebar-header {
             padding: 1rem;
-            background-color: #111;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .sidebar-header h2 {
             margin: 0;
+            font-size: 1.2rem;
         }
         .sidebar-header button {
             background: none;
-            color: #fff;
+            color: #555;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
@@ -83,34 +133,36 @@
             padding: 1rem;
         }
         .menu-item {
-            padding: 0.8rem;
+            padding: 1rem;
             margin: 0.5rem 0;
-            background-color: #333;
-            border-radius: 8px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
             text-align: center;
             cursor: pointer;
             transition: background 0.3s;
         }
         .menu-item:hover {
-            background-color: #444;
+            background-color: #e2e6ea;
         }
+        /* Popup */
         .popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #222;
-            color: #fff;
+            background-color: #fff;
+            color: #333;
             padding: 2rem;
             border-radius: 10px;
             width: 400px;
             display: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             z-index: 2000;
         }
         .popup h2 {
             margin: 0 0 1rem;
             text-align: center;
+            color: #555;
         }
         .popup .close-btn {
             position: absolute;
@@ -119,13 +171,11 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #fff;
+            color: #333;
             cursor: pointer;
         }
         .file-upload {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
             margin-bottom: 1rem;
         }
         .file-upload input[type="file"] {
@@ -133,13 +183,10 @@
         }
         .file-upload label {
             padding: 0.5rem 1rem;
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
-        }
-        .file-upload label:hover {
-            background-color: #444;
         }
         .file-upload img {
             width: 100px;
@@ -155,6 +202,19 @@
         <h1>PlayField</h1>
         <div class="profile" id="profile"></div>
     </header>
+
+    <div class="slideshow">
+        <div class="slides">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -172,53 +232,13 @@
         <div class="file-upload">
             <img id="preview-img" src="" alt="Foto de perfil">
             <input type="file" id="upload-img" accept="image/*" onchange="updateProfileImage(event)">
-            <label for="upload-img">Selecione uma nova foto</label>
+            <label for="upload-img">Selecione nova foto</label>
         </div>
         <button onclick="saveProfile()">Salvar Alterações</button>
     </div>
 
     <script>
-        const profile = document.getElementById('profile');
-        const sidebar = document.getElementById('sidebar');
-        const popup = document.getElementById('popup');
-        const previewImg = document.getElementById('preview-img');
-
-        // Configurações iniciais
-        const userName = prompt("Digite seu nome:");
-        profile.textContent = userName[0].toUpperCase(); // Inicial do nome como avatar padrão
-
-        // Ações da sidebar
-        profile.onclick = () => sidebar.classList.add('open');
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-        }
-
-        // Ações do pop-up
-        function openPopup() {
-            popup.style.display = 'block';
-        }
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        // Atualizar imagem de perfil
-        function updateProfileImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    previewImg.src = reader.result;
-                    profile.style.backgroundImage = `url('${reader.result}')`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Salvar alterações
-        function saveProfile() {
-            closePopup();
-        }
+        // JavaScript para slideshow, perfil e pop-up
     </script>
 </body>
 </html>
