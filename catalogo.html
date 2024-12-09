@@ -171,10 +171,7 @@
                 <img src="https://via.placeholder.com/200x150" alt="Game 3">
                 <h3>Game 3</h3>
             </div>
-        </div>
-
-        <h2 class="category-title">Aventura</h2>
-        <div class="games">
+            <!-- Novos Jogos -->
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 4">
                 <h3>Game 4</h3>
@@ -189,7 +186,7 @@
             </div>
         </div>
 
-        <h2 class="category-title">Estratégia</h2>
+        <h2 class="category-title">Aventura</h2>
         <div class="games">
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 7">
@@ -203,10 +200,7 @@
                 <img src="https://via.placeholder.com/200x150" alt="Game 9">
                 <h3>Game 9</h3>
             </div>
-        </div>
-
-        <h2 class="category-title">Esportes</h2>
-        <div class="games">
+            <!-- Novos Jogos -->
             <div class="game-card">
                 <img src="https://via.placeholder.com/200x150" alt="Game 10">
                 <h3>Game 10</h3>
@@ -220,77 +214,85 @@
                 <h3>Game 12</h3>
             </div>
         </div>
+
+        <h2 class="category-title">Estratégia</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 13">
+                <h3>Game 13</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 14">
+                <h3>Game 14</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 15">
+                <h3>Game 15</h3>
+            </div>
+            <!-- Novos Jogos -->
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 16">
+                <h3>Game 16</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 17">
+                <h3>Game 17</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 18">
+                <h3>Game 18</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">Esportes</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 19">
+                <h3>Game 19</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 13">
+                <h3>Game 13</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 14">
+                <h3>Game 14</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 15">
+                <h3>Game 15</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">RPG</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 16">
+                <h3>Game 16</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 17">
+                <h3>Game 17</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 18">
+                <h3>Game 18</h3>
+            </div>
+        </div>
+
+        <h2 class="category-title">Simulação</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 19">
+                <h3>Game 19</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 20">
+                <h3>Game 20</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x150" alt="Game 21">
+                <h3>Game 21</h3>
+            </div>
+        </div>
     </div>
-
-    <!-- Gaveta Lateral -->
-    <div class="drawer" id="drawer">
-        <button class="close-btn" id="closeDrawer">&times;</button>
-        <h3>Meu Perfil</h3>
-        <p>Nome: <span id="profileName"></span></p>
-        <input type="file" id="profilePicInput" accept="image/*">
-        <button id="saveProfilePic">Alterar Foto</button>
-    </div>
-
-    <script>
-        // Slideshow automático
-        let currentSlide = 0;
-        const slides = document.getElementById("slides");
-        const totalSlides = slides.children.length;
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }, 3000);
-
-        // Gaveta Lateral
-        const drawer = document.getElementById('drawer');
-        const userIcon = document.getElementById('userIcon');
-        const closeDrawer = document.getElementById('closeDrawer');
-        const profileName = document.getElementById('profileName');
-        const profilePicInput = document.getElementById('profilePicInput');
-        const saveProfilePic = document.getElementById('saveProfilePic');
-
-        // Exibir nome do perfil
-        const userName = localStorage.getItem('playfieldUserName');
-        profileName.textContent = userName ||
-
-// Exibir nome do perfil
-        const userName = localStorage.getItem('playfieldUserName');
-        profileName.textContent = userName || "Usuário";
-
-        // Exibir foto de perfil
-        const profilePic = localStorage.getItem('playfieldProfilePic');
-        const userIcon = document.getElementById('userIcon');
-        
-        if (profilePic) {
-            userIcon.innerHTML = `<img src="${profilePic}" alt="Foto de perfil">`;
-        } else {
-            userIcon.textContent = userName ? userName.charAt(0).toUpperCase() : "U";
-        }
-
-        // Abrir gaveta lateral ao clicar no ícone do usuário
-        userIcon.addEventListener('click', () => {
-            drawer.classList.add('open');
-        });
-
-        // Fechar gaveta lateral
-        closeDrawer.addEventListener('click', () => {
-            drawer.classList.remove('open');
-        });
-
-        // Alterar foto de perfil
-        saveProfilePic.addEventListener('click', () => {
-            const file = profilePicInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    localStorage.setItem('playfieldProfilePic', reader.result);
-                    userIcon.innerHTML = `<img src="${reader.result}" alt="Foto de perfil">`;
-                    alert('Sua foto de perfil foi alterada! Wooooop!');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
-</body>
-</html>
