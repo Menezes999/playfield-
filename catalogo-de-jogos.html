@@ -47,51 +47,6 @@
             height: 100%;
             object-fit: cover;
         }
-        /* Slideshow */
-        .slideshow {
-            position: relative;
-            max-width: 100%;
-            height: 200px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slide {
-            min-width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-        .slide:nth-child(1) {
-            background-image: url('https://via.placeholder.com/800x200?text=Banner+1');
-        }
-        .slide:nth-child(2) {
-            background-image: url('https://via.placeholder.com/800x200?text=Banner+2');
-        }
-        .slide:nth-child(3) {
-            background-image: url('https://via.placeholder.com/800x200?text=Banner+3');
-        }
-        .dots {
-            display: flex;
-            justify-content: center;
-            margin-top: -25px;
-            position: relative;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            margin: 0 5px;
-            background-color: #ddd;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .dot.active {
-            background-color: #555;
-        }
         /* Sidebar */
         .sidebar {
             position: fixed;
@@ -144,77 +99,13 @@
         .menu-item:hover {
             background-color: #e2e6ea;
         }
-        /* Popup */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            color: #333;
-            padding: 2rem;
-            border-radius: 10px;
-            width: 400px;
-            display: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 2000;
-        }
-        .popup h2 {
-            margin: 0 0 1rem;
-            text-align: center;
-            color: #555;
-        }
-        .popup .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #333;
-            cursor: pointer;
-        }
-        .file-upload {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        .file-upload input[type="file"] {
-            display: none;
-        }
-        .file-upload label {
-            padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .file-upload img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
     </style>
 </head>
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile"></div>
+        <div class="profile" id="profile" onclick="openSidebar()">A</div>
     </header>
-
-    <div class="slideshow">
-        <div class="slides">
-            <div class="slide"></div>
-            <div class="slide"></div>
-            <div class="slide"></div>
-        </div>
-        <div class="dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </div>
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -222,23 +113,20 @@
             <button onclick="closeSidebar()">&times;</button>
         </div>
         <div class="sidebar-content">
-            <div class="menu-item" onclick="openPopup()">Editar Perfil</div>
+            <div class="menu-item" onclick="alert('Editar perfil em breve!')">Editar Perfil</div>
         </div>
-    </div>
-
-    <div class="popup" id="popup">
-        <button class="close-btn" onclick="closePopup()">&times;</button>
-        <h2>Edite seu Perfil</h2>
-        <div class="file-upload">
-            <img id="preview-img" src="" alt="Foto de perfil">
-            <input type="file" id="upload-img" accept="image/*" onchange="updateProfileImage(event)">
-            <label for="upload-img">Selecione nova foto</label>
-        </div>
-        <button onclick="saveProfile()">Salvar Alterações</button>
     </div>
 
     <script>
-        // JavaScript para slideshow, perfil e pop-up
+        const sidebar = document.getElementById('sidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+        }
     </script>
 </body>
 </html>
