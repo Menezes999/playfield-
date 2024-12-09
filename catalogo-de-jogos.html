@@ -314,8 +314,23 @@
         }
 
         function saveChanges() {
-            alert('Alterações salvas!');
+            const imgSrc = profile.style.backgroundImage || 'none';
+            localStorage.setItem('profileImage', imgSrc);
+            profile.style.backgroundImage = imgSrc;
+            profile.style.backgroundSize = 'cover';
+            profile.style.backgroundPosition = 'center';
+            profile.textContent = '';
             closePopup();
+        }
+
+        window.onload = () => {
+            const savedProfileImage = localStorage.getItem('profileImage');
+            if (savedProfileImage) {
+                profile.style.backgroundImage = savedProfileImage;
+                profile.style.backgroundSize = 'cover';
+                profile.style.backgroundPosition = 'center';
+                profile.textContent = '';
+            }
         }
     </script>
 </body>
