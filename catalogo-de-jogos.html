@@ -26,7 +26,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .logo {
-            width: 80px;
+            width: 120px;
         }
         .profile-section {
             display: flex;
@@ -267,7 +267,7 @@
         <h3>Editar Perfil</h3>
         <div class="profile-upload">
             <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
-            <input type="file" id="upload-photo" accept="image/*">
+            <input type="file" id="upload-photo" accept="image/*" onchange="updatePreview(event)">
             <label for="upload-photo">Escolher Foto</label>
             <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         </div>
@@ -293,8 +293,18 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePic.src = e.target.result;
-                    profilePreview.src = e.target.result;
                     localStorage.setItem('profile-photo', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updatePreview(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePreview.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
