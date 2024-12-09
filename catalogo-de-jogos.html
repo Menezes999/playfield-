@@ -64,7 +64,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 1s ease-in-out;
         }
         .banner img.active {
             opacity: 1;
@@ -178,7 +178,7 @@
         </div>
     </header>
 
-    <div class="banner">
+    <div class="banner" id="banner">
         <img src="banner1.png" alt="Banner 1" class="active">
         <img src="banner2.png" alt="Banner 2">
         <img src="banner3.png" alt="Banner 3">
@@ -236,11 +236,27 @@
             toggleDrawer();
         }
 
-        // Carregar foto do perfil ao iniciar o site
         const savedPhoto = localStorage.getItem('profilePhoto');
         if (savedPhoto) {
             profilePic.src = savedPhoto;
         }
+
+        // Slideshow com fade-out
+        const banners = document.querySelectorAll('.banner img');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+
+        function changeBanner() {
+            banners[currentIndex].classList.remove('active');
+            indicators[currentIndex].classList.remove('active');
+
+            currentIndex = (currentIndex + 1) % banners.length;
+
+            banners[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeBanner, 4000);
     </script>
 </body>
 </html>
