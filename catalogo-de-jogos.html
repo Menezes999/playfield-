@@ -39,7 +39,7 @@
             cursor: pointer;
             overflow: hidden;
             position: absolute;
-            top: 15px;
+            top: 10px; /* Ajustado para subir a foto de perfil */
             right: 15px;
         }
         .profile img {
@@ -49,7 +49,7 @@
         }
         .welcome-message {
             position: absolute;
-            top: 18px;
+            top: 18px; /* Ajustado para alinhar melhor com a foto */
             right: 70px;
             color: #fff;
             font-size: 1rem;
@@ -277,11 +277,14 @@
                 <img src="https://via.placeholder.com/200x120" alt="Jogo 2">
                 <h3>Jogo 2</h3>
             </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 3">
+                <h3>Jogo 3</h3>
+            </div>
         </div>
     </main>
 
     <script>
-        // Funções do banner
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
@@ -312,7 +315,6 @@
         const userName = document.getElementById('user-name');
         let profileImageSaved = false;
 
-        // Abrir/Fechar gaveta lateral
         function openSidebar() {
             sidebar.classList.add('open');
         }
