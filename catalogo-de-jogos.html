@@ -49,10 +49,10 @@
             left: 0;
         }
         .profile .default-img {
-            z-index: 1; /* Foto padrão atrás da foto do usuário */
+            z-index: 1; 
         }
         .profile .uploaded-img {
-            z-index: 2; /* Foto carregada na frente */
+            z-index: 2; 
         }
         .welcome-message {
             position: absolute;
@@ -238,8 +238,8 @@
     <header>
         <h1>PlayField</h1>
         <div class="profile" id="profile" onclick="openSidebar()">
-            <img src="semfoto.jpg" class="default-img" alt="Foto Padrão"> <!-- Foto padrão -->
-            <img src="" class="uploaded-img" alt="Foto Carregada" style="display: none;"> <!-- Foto carregada, inicialmente oculta -->
+            <img src="semfoto.jpg" class="default-img" alt="Foto Padrão"> 
+            <img src="" class="uploaded-img" alt="Foto Carregada" style="display: none;"> 
         </div>
         <div class="welcome-message" id="welcome-message">Bem-vindo</div>
     </header>
@@ -348,7 +348,7 @@
                     const uploadedImg = profile.querySelector('.uploaded-img');
                     uploadedImg.src = reader.result;
                     uploadedImg.style.display = 'block';
-                    profile.querySelector('.default-img').style.display = 'none'; // Esconde a foto padrão
+                    profile.querySelector('.default-img').style.display = 'none'; 
                 };
                 reader.readAsDataURL(file);
             }
@@ -359,7 +359,7 @@
             const imgSrc = uploadedImg.style.display === 'none' ? 'semfoto.png' : uploadedImg.src;
             localStorage.setItem('profileImage', imgSrc);
             profile.style.backgroundImage = `url(${imgSrc})`;
-            welcomeMessage.textContent = `Bem-vindo`; // Mensagem de boas-vindas simplificada
+            welcomeMessage.textContent = `Bem-vindo`; 
             closePopup();
         }
 
@@ -368,7 +368,7 @@
             if (savedProfileImage) {
                 profile.querySelector('.uploaded-img').src = savedProfileImage;
                 profile.querySelector('.uploaded-img').style.display = 'block';
-                profile.querySelector('.default-img').style.display = 'none'; // Esconde a foto padrão
+                profile.querySelector('.default-img').style.display = 'none'; 
             }
         }
     </script>
