@@ -41,6 +41,7 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
+            cursor: pointer;
         }
         .profile img {
             width: 100%;
@@ -93,6 +94,40 @@
         .game-card button:hover {
             background-color: #555;
         }
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #222;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s;
+            padding: 1rem;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+        }
+        .drawer button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .drawer button:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -100,7 +135,7 @@
         <img src="logo.png" alt="PlayField Logo" class="logo">
         <div class="profile-section">
             <p class="welcome">Bem-vindo</p>
-            <div class="profile">
+            <div class="profile" id="profile" onclick="toggleDrawer()">
                 <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
             </div>
         </div>
@@ -124,5 +159,22 @@
             </div>
         </div>
     </main>
+
+    <div class="drawer" id="drawer">
+        <h3>Editar Perfil</h3>
+        <button onclick="toggleDrawer()">Fechar</button>
+    </div>
+
+    <script>
+        const drawer = document.getElementById('drawer');
+
+        function toggleDrawer() {
+            if (drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+            } else {
+                drawer.classList.add('open');
+            }
+        }
+    </script>
 </body>
 </html>
