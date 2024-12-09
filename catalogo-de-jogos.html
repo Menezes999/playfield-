@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayField - Catálogo</title>
     <style>
+        /* Estilos Gerais */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -33,11 +34,6 @@
             width: 40px;
             height: 40px;
             background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-            font-weight: bold;
             border-radius: 50%;
             overflow: hidden;
             position: relative;
@@ -49,9 +45,11 @@
             object-fit: cover;
         }
         .welcome {
-            font-size: 0.9rem;
             margin: 0;
+            font-size: 0.9rem;
         }
+
+        /* Slideshow */
         .banner {
             position: relative;
             width: 100%;
@@ -59,41 +57,39 @@
             overflow: hidden;
         }
         .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .game-section {
-            padding: 1rem;
+        .banner img.active {
+            opacity: 1;
         }
-        .game-section h2 {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-        .game-row {
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 1rem;
-            overflow-x: auto;
+            gap: 10px;
         }
-        .game-card {
-            min-width: 200px;
-            background-color: #222;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.3s;
         }
-        .game-card button {
-            margin-top: 10px;
-            padding: 0.5rem 1rem;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .indicator.active {
+            opacity: 1;
         }
-        .game-card button:hover {
-            background-color: #555;
-        }
+
+        /* Gaveta Lateral */
         .drawer {
             position: fixed;
             top: 0;
@@ -111,9 +107,8 @@
             right: 0;
         }
         .drawer h3 {
-            color: #fff;
             font-size: 1.2rem;
-            margin: 0 0 1rem 0;
+            margin: 0 0 1rem;
         }
         .drawer button {
             display: block;
@@ -125,7 +120,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            text-align: center;
         }
         .drawer button:hover {
             background-color: #ddd;
@@ -144,34 +138,54 @@
     </header>
 
     <div class="banner">
-        <img src="banner1.png" class="slide" alt="Banner 1">
-        <img src="banner2.png" class="slide" alt="Banner 2" style="display: none;">
+        <img src="banner1.png" alt="Banner 1" class="active">
+        <img src="banner2.png" alt="Banner 2">
+        <img src="banner3.png" alt="Banner 3">
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
     </div>
 
-    <main class="game-section">
+    <main>
         <h2>Jogos em Destaque</h2>
-        <div class="game-row">
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 1">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 2">
-                <button>Jogar Agora</button>
-            </div>
-        </div>
+        <!-- Conteúdo dos Jogos -->
     </main>
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
+        <input type="file" id="upload-photo" accept="image/*">
+        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
     <script>
         const drawer = document.getElementById('drawer');
+        const profilePic = document.getElementById('profile-pic');
+        const uploadPhotoInput = document.getElementById('upload-photo');
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
+        }
+
+        function saveProfilePhoto() {
+            const file = uploadPhotoInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    localStorage.setItem('profilePhoto', reader.result);
+                    profilePic.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            toggleDrawer();
+        }
+
+        // Carregar foto do perfil ao iniciar o site
+        const savedPhoto = localStorage.getItem('profilePhoto');
+        if (savedPhoto) {
+            profilePic.src = savedPhoto;
         }
     </script>
 </body>
