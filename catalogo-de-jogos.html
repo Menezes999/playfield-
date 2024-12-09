@@ -93,6 +93,19 @@
         .menu-item:hover {
             background-color: #444;
         }
+        .close-sidebar {
+            padding: 1rem;
+            background-color: #fff;
+            color: #000;
+            font-size: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 1rem;
+            border-radius: 5px;
+        }
+        .close-sidebar:hover {
+            background-color: #ddd;
+        }
         .banner {
             position: relative;
             width: 100%;
@@ -227,6 +240,7 @@
         </div>
         <div class="sidebar-content">
             <div class="menu-item" onclick="openPopup()">Editar Perfil</div>
+            <div class="close-sidebar" onclick="closeSidebar()">Fechar</div>
         </div>
     </div>
 
@@ -271,7 +285,7 @@
         setInterval(() => {
             currentSlide = (currentSlide + 1) % slides.length;
             updateSlides();
-        }, 4000);
+        }, 5000);
 
         function goToSlide(index) {
             currentSlide = index;
@@ -281,11 +295,10 @@
         const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
-        const uploadImgInput = document.getElementById('upload-img');
 
-        profile.onclick = () => {
+        function openSidebar() {
             sidebar.classList.add('open');
-        };
+        }
 
         function closeSidebar() {
             sidebar.classList.remove('open');
