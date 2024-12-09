@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField - Catálogo</title>
+    <title>PlayField - Perfil</title>
     <style>
-        /* Estilos Gerais */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -18,22 +17,22 @@
             align-items: center;
             padding: 1rem;
             background-color: #111;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
         .logo {
-            width: 60px;
+            width: 120px;
         }
         .profile-section {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+        .welcome {
+            margin: 0;
+            font-size: 0.9rem;
+        }
         .profile {
             width: 40px;
             height: 40px;
-            background-color: #333;
             border-radius: 50%;
             overflow: hidden;
             position: relative;
@@ -44,52 +43,6 @@
             height: 100%;
             object-fit: cover;
         }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        /* Slideshow */
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-        .banner img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .banner img.active {
-            opacity: 1;
-        }
-        .indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #fff;
-            border-radius: 50%;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        .indicator.active {
-            opacity: 1;
-        }
-
-        /* Gaveta Lateral */
         .drawer {
             position: fixed;
             top: 0;
@@ -97,18 +50,44 @@
             width: 300px;
             height: 100%;
             background-color: #222;
-            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
             padding: 1rem;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             z-index: 2000;
-            overflow-y: auto;
         }
         .drawer.open {
             right: 0;
         }
-        .drawer h3 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem;
+        .profile-edit {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+        }
+        .profile-edit img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .profile-edit input {
+            display: none;
         }
         .drawer button {
             display: block;
@@ -124,47 +103,6 @@
         .drawer button:hover {
             background-color: #ddd;
         }
-
-        /* Jogos em Destaque */
-        main {
-            padding: 1rem;
-        }
-        h2 {
-            text-align: left;
-            margin-left: 20px;
-        }
-        .games {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px;
-        }
-        .game-card {
-            background-color: #222;
-            padding: 10px;
-            border-radius: 10px;
-            min-width: 150px;
-            text-align: center;
-        }
-        .game-card img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .game-card button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #fff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .game-card button:hover {
-            background-color: #ddd;
-        }
     </style>
 </head>
 <body>
@@ -178,85 +116,54 @@
         </div>
     </header>
 
-    <div class="banner" id="banner">
-        <img src="banner1.png" alt="Banner 1" class="active">
-        <img src="banner2.png" alt="Banner 2">
-        <img src="banner3.png" alt="Banner 3">
-        <div class="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-        </div>
-    </div>
-
     <main>
-        <h2>Jogos em Destaque</h2>
-        <div class="games">
-            <div class="game-card">
-                <img src="jogo1.jpg" alt="Jogo 1">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="jogo2.jpg" alt="Jogo 2">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="jogo3.jpg" alt="Jogo 3">
-                <button>Jogar Agora</button>
-            </div>
-        </div>
+        <!-- Conteúdo Principal -->
     </main>
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <input type="file" id="upload-photo" accept="image/*">
-        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+        <div class="profile-edit" onclick="selectNewPhoto()">
+            <img id="edit-profile-pic" src="semfoto.jpg" alt="Editar Perfil">
+            <div class="overlay">Envie uma foto</div>
+            <input type="file" id="upload-photo" accept="image/*" onchange="updateProfilePhoto()">
+        </div>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
     <script>
         const drawer = document.getElementById('drawer');
         const profilePic = document.getElementById('profile-pic');
+        const editProfilePic = document.getElementById('edit-profile-pic');
         const uploadPhotoInput = document.getElementById('upload-photo');
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
         }
 
-        function saveProfilePhoto() {
+        function selectNewPhoto() {
+            uploadPhotoInput.click();
+        }
+
+        function updateProfilePhoto() {
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    localStorage.setItem('profilePhoto', reader.result);
-                    profilePic.src = reader.result;
+                    // Exibir a foto carregada sobre a foto padrão
+                    const newImageSrc = reader.result;
+                    profilePic.src = newImageSrc;
+                    editProfilePic.src = newImageSrc;
                 };
                 reader.readAsDataURL(file);
             }
-            toggleDrawer();
         }
 
+        // Carregar foto de perfil salva
         const savedPhoto = localStorage.getItem('profilePhoto');
         if (savedPhoto) {
             profilePic.src = savedPhoto;
+            editProfilePic.src = savedPhoto;
         }
-
-        // Slideshow com fade-out
-        const banners = document.querySelectorAll('.banner img');
-        const indicators = document.querySelectorAll('.indicator');
-        let currentIndex = 0;
-
-        function changeBanner() {
-            banners[currentIndex].classList.remove('active');
-            indicators[currentIndex].classList.remove('active');
-
-            currentIndex = (currentIndex + 1) % banners.length;
-
-            banners[currentIndex].classList.add('active');
-            indicators[currentIndex].classList.add('active');
-        }
-
-        setInterval(changeBanner, 4000);
     </script>
 </body>
 </html>
