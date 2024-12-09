@@ -8,53 +8,61 @@
         /* Estilos Gerais */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
             color: #fff;
+            overflow-x: hidden;
         }
+
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            background-color: #111;
+            padding: 20px;
+            background-color: #222;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .logo {
             width: 80px;
+            filter: brightness(0) invert(1);
         }
         .profile-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         .profile {
-            width: 40px;
-            height: 40px;
-            background-color: #333;
+            width: 45px;
+            height: 45px;
+            background-color: #444;
             border-radius: 50%;
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border: 2px solid #444;
+            transition: border 0.3s ease;
+        }
+        .profile:hover {
+            border-color: #00bcd4;
         }
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-        }
 
         /* Slideshow */
         .banner {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 350px;
             overflow: hidden;
+            margin-bottom: 40px;
+            border-radius: 10px;
         }
         .banner img {
             position: absolute;
@@ -99,30 +107,36 @@
             background-color: #222;
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
-            padding: 1rem;
+            padding: 1.5rem;
             z-index: 2000;
             overflow-y: auto;
+            border-radius: 10px 0 0 10px;
         }
         .drawer.open {
             right: 0;
         }
         .drawer h3 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem;
+            font-size: 1.4rem;
+            margin: 0 0 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #00bcd4;
         }
         .drawer button {
             display: block;
             width: 100%;
-            padding: 0.5rem;
+            padding: 0.7rem;
             margin-top: 10px;
-            background-color: #fff;
-            color: #000;
+            background-color: #00bcd4;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
         .drawer button:hover {
-            background-color: #ddd;
+            background-color: #0097a7;
         }
 
         /* Escolher Foto */
@@ -131,21 +145,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 10px;
         }
         .profile-photo-container img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 10px;
+            border: 3px solid #00bcd4;
+            transition: transform 0.3s ease;
+        }
+        .profile-photo-container img:hover {
+            transform: scale(1.1);
         }
         .choose-photo-button {
             background-color: #333;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             cursor: pointer;
             border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
         .choose-photo-button:hover {
             background-color: #444;
@@ -153,44 +175,57 @@
 
         /* Jogos em Destaque */
         main {
-            padding: 1rem;
+            padding: 2rem 1rem;
+            background-color: #111;
+            color: #fff;
         }
         h2 {
+            font-size: 1.8rem;
             text-align: left;
             margin-left: 20px;
+            font-weight: bold;
+            color: #00bcd4;
         }
         .games {
             display: flex;
             flex-wrap: nowrap;
-            gap: 10px;
+            gap: 20px;
             overflow-x: auto;
             padding: 10px;
+            margin-top: 20px;
         }
         .game-card {
             background-color: #222;
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
-            min-width: 150px;
+            min-width: 180px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
         }
         .game-card img {
             width: 100%;
-            height: 100px;
+            height: 120px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 10px;
         }
         .game-card button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #fff;
-            color: #000;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #00bcd4;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
         .game-card button:hover {
-            background-color: #ddd;
+            background-color: #0097a7;
         }
+
     </style>
 </head>
 <body>
@@ -258,8 +293,8 @@
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = () => {
-                    profilePreview.src = reader.result;
+                reader.onload = function(e) {
+                    profilePreview.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
@@ -269,37 +304,36 @@
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = () => {
-                    localStorage.setItem('profilePhoto', reader.result);
-                    profilePic.src = reader.result;
+                reader.onload = function(e) {
+                    localStorage.setItem('profilePic', e.target.result);
+                    profilePic.src = e.target.result;
+                    toggleDrawer();
                 };
                 reader.readAsDataURL(file);
             }
-            toggleDrawer();
         }
 
-        const savedPhoto = localStorage.getItem('profilePhoto');
-        if (savedPhoto) {
-            profilePic.src = savedPhoto;
-            profilePreview.src = savedPhoto;
-        }
+        // Load saved profile picture
+        window.onload = function() {
+            const savedProfilePic = localStorage.getItem('profilePic');
+            if (savedProfilePic) {
+                profilePic.src = savedProfilePic;
+                profilePreview.src = savedProfilePic;
+            }
+        };
 
-        // Slideshow com fade-out
-        const banners = document.querySelectorAll('.banner img');
+        // Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner img');
         const indicators = document.querySelectorAll('.indicator');
-        let currentIndex = 0;
 
-        function changeBanner() {
-            banners[currentIndex].classList.remove('active');
-            indicators[currentIndex].classList.remove('active');
-
-            currentIndex = (currentIndex + 1) % banners.length;
-
-            banners[currentIndex].classList.add('active');
-            indicators[currentIndex].classList.add('active');
-        }
-
-        setInterval(changeBanner, 4000);
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }, 5000);
     </script>
 </body>
 </html>
