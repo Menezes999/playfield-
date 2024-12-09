@@ -104,6 +104,24 @@
             height: 100%;
             object-fit: cover;
         }
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #444;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: #fff;
+        }
         .game-section {
             padding: 1rem;
         }
@@ -141,20 +159,6 @@
             margin: 0 0 1rem;
             text-align: center;
         }
-        .popup label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .popup input[type="file"],
-        .popup input[type="text"] {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-        }
         .popup button {
             display: block;
             margin: 1rem auto 0;
@@ -178,6 +182,25 @@
             color: #fff;
             cursor: pointer;
         }
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        .file-upload label {
+            padding: 0.5rem 1rem;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .file-upload label:hover {
+            background-color: #444;
+        }
     </style>
 </head>
 <body>
@@ -189,6 +212,12 @@
     <div class="banner">
         <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 1">
         <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 2" style="display: none;">
+        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 3" style="display: none;">
+        <div class="dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
     </div>
 
     <div class="sidebar" id="sidebar">
@@ -204,12 +233,10 @@
     <div class="popup" id="popup">
         <button class="close-btn" onclick="closePopup()">&times;</button>
         <h2>Edite seu Perfil</h2>
-        <label for="upload-img">Foto de Perfil:</label>
-        <input type="file" id="upload-img">
-        <label for="change-name">Alterar Nome:</label>
-        <input type="text" id="change-name" placeholder="Novo nome">
-        <h3>Dispositivos Conectados:</h3>
-        <p id="device-info"></p>
+        <div class="file-upload">
+            <input type="file" id="upload-img">
+            <label for="upload-img">Selecione uma nova foto</label>
+        </div>
         <button>Salvar Alterações</button>
     </div>
 
@@ -230,35 +257,46 @@
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.style.display = index === currentSlide ? 'block' : 'none';
+            });
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
 
         setInterval(() => {
-            slides[currentSlide].style.display = 'none';
             currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].style.display = 'block';
-        }, 5000);
+            updateSlides();
+        }, 4000);
 
-        function openPopup() {
-            document.getElementById('popup').style.display = 'block';
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
         }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-
-        const profileDiv = document.getElementById('profile');
+        const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
-        const userName = localStorage.getItem('playfieldUserName') || "U";
-        profileDiv.textContent = userName.charAt(0).toUpperCase();
+        const popup = document.getElementById('popup');
 
-        profileDiv.addEventListener('click', () => {
+        profile.onclick = () => {
             sidebar.classList.add('open');
-        });
+        };
 
         function closeSidebar() {
             sidebar.classList.remove('open');
         }
 
-        document.getElementById('device-info').textContent = `Dispositivo Atual: ${navigator.platform}, Local: Brasil`;
+        function openPopup() {
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
     </script>
 </body>
 </html>
