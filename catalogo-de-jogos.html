@@ -39,6 +39,9 @@
             cursor: pointer;
             overflow: hidden;
             display: none; /* Initially hidden */
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
         .profile img {
             width: 100%;
@@ -342,7 +345,7 @@
 
         window.onload = () => {
             const savedProfileImage = localStorage.getItem('profileImage');
-            if (savedProfileImage) {
+            if (savedProfileImage && profileImageSaved) {
                 profile.style.backgroundImage = savedProfileImage;
                 profile.style.backgroundSize = 'cover';
                 profile.style.backgroundPosition = 'center';
