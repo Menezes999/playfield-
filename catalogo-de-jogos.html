@@ -47,6 +47,14 @@
             height: 100%;
             object-fit: cover;
         }
+        .welcome-message {
+            position: absolute;
+            top: 18px;
+            right: 70px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+        }
         .sidebar {
             position: fixed;
             top: 0;
@@ -223,6 +231,7 @@
     <header>
         <h1>PlayField</h1>
         <div class="profile" id="profile" onclick="openSidebar()">M</div> <!-- Default profile initial -->
+        <div class="welcome-message" id="welcome-message">Bem-vindo, <span id="user-name">Usuário</span></div>
     </header>
 
     <div class="banner">
@@ -272,6 +281,7 @@
     </main>
 
     <script>
+        // Funções do banner
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
@@ -298,8 +308,11 @@
         const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const userName = document.getElementById('user-name');
         let profileImageSaved = false;
 
+        // Abrir/Fechar gaveta lateral
         function openSidebar() {
             sidebar.classList.add('open');
         }
@@ -332,24 +345,31 @@
 
         function saveChanges() {
             const imgSrc = profile.style.backgroundImage || 'none';
+            const name = userName.textContent || 'Usuário'; // Use name in profile
             localStorage.setItem('profileImage', imgSrc);
+            localStorage.setItem('userName', name); // Save name locally
             profile.style.backgroundImage = imgSrc;
             profile.style.backgroundSize = 'cover';
             profile.style.backgroundPosition = 'center';
             profile.textContent = '';
             profile.style.display = 'block'; // Show profile image after saving
+            userName.textContent = name;
+            welcomeMessage.textContent = `Bem-vindo, ${name}`; // Update welcome message
             closePopup();
             profileImageSaved = true; // Indicate profile image has been saved
         }
 
         window.onload = () => {
             const savedProfileImage = localStorage.getItem('profileImage');
-            if (savedProfileImage && profileImageSaved) {
+            const savedUserName = localStorage.getItem('userName');
+            if (savedProfileImage && savedUserName) {
                 profile.style.backgroundImage = savedProfileImage;
                 profile.style.backgroundSize = 'cover';
                 profile.style.backgroundPosition = 'center';
                 profile.textContent = '';
                 profile.style.display = 'block'; // Show saved profile image on load
+                userName.textContent = savedUserName;
+                welcomeMessage.textContent = `Bem-vindo, ${savedUserName}`; // Show saved user name
             }
         }
     </script>
