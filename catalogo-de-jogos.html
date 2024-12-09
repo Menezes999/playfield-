@@ -153,6 +153,7 @@
                     const newImageSrc = reader.result;
                     profilePic.src = newImageSrc;
                     editProfilePic.src = newImageSrc;
+                    localStorage.setItem('profilePhoto', newImageSrc); // Salva a imagem no localStorage
                 };
                 reader.readAsDataURL(file);
             }
