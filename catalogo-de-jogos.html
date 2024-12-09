@@ -164,7 +164,9 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = () => {
+                    // Salva a foto carregada no localStorage
                     localStorage.setItem('profilePhoto', reader.result);
+                    // Atualiza a foto de perfil
                     profilePic.src = reader.result;
                     editProfilePic.src = reader.result;
                     profileInitial.style.display = 'none'; // Esconde a inicial
