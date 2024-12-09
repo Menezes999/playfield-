@@ -209,8 +209,7 @@
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <input type="file" id="upload-photo" accept="image/*">
-        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+        <input type="file" id="upload-photo" accept="image/*" onchange="updateProfilePhoto()">
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
@@ -223,7 +222,7 @@
             drawer.classList.toggle('open');
         }
 
-        function saveProfilePhoto() {
+        function updateProfilePhoto() {
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
