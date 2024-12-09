@@ -102,8 +102,10 @@
             height: 100%;
             background-color: #222;
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s;
+            transition: right 0.3s ease;
             padding: 1rem;
+            z-index: 2000;
+            overflow-y: auto;
         }
         .drawer.open {
             right: 0;
@@ -169,11 +171,7 @@
         const drawer = document.getElementById('drawer');
 
         function toggleDrawer() {
-            if (drawer.classList.contains('open')) {
-                drawer.classList.remove('open');
-            } else {
-                drawer.classList.add('open');
-            }
+            drawer.classList.toggle('open');
         }
     </script>
 </body>
