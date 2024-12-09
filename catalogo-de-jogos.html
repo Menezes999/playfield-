@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayField - Catálogo</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #111;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .profile {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #111;
+            color: #fff;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+            padding: 1rem;
+        }
+        .sidebar.open {
+            right: 0;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar input[type="file"] {
+            display: block;
+            margin-top: 1rem;
+        }
+        .game-section {
+            padding: 1rem;
+        }
+        .game-section h2 {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+        .game-row {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+        }
+        .game-card {
+            min-width: 200px;
+            background-color: #222;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+        .game-card h3 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PlayField</h1>
+        <div class="profile" id="profile">
+            <!-- Letra inicial ou imagem do usuário -->
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <h2>Meu Perfil</h2>
+        <p id="userName"></p>
+        <input type="file" id="profilePic" accept="image/*">
+        <button onclick="closeSidebar()">Fechar</button>
+    </div>
+
+    <main class="game-section">
+        <h2>Jogos em Destaque</h2>
+        <div class="game-row">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 1">
+                <h3>Jogo 1</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 2">
+                <h3>Jogo 2</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 3">
+                <h3>Jogo 3</h3>
+            </div>
+        </div>
+
+        <h2>Novos Lançamentos</h2>
+        <div class="game-row">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 4">
+                <h3>Jogo 4</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 5">
+                <h3>Jogo 5</h3>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/200x120" alt="Jogo 6">
+                <h3>Jogo 6</h3>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const profileDiv = document.getElementById('profile');
+        const sidebar = document.getElementById('sidebar');
+        const userName = localStorage.getItem('playfieldUserName');
+        const storedProfilePic = localStorage.getItem('profilePic');
+
+        if (userName) {
+            profileDiv.textContent = userName.charAt(0).toUpperCase();
+        }
+
+        if (storedProfilePic) {
+            const img = document.createElement('img');
+            img.src = storedProfilePic;
+            profileDiv.textContent = '';
+            profileDiv.appendChild(img);
+        }
+
+        profileDiv.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            document.getElementById('userName').textContent = `Nome: ${userName}`;
+        });
+
+        document.getElementById('profilePic').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    localStorage.setItem('profilePic', e.target.result);
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    profileDiv.textContent = '';
+                    profileDiv.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+        }
+    </script>
+</body>
+</html>
