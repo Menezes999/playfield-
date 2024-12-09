@@ -64,18 +64,24 @@
             padding: 1rem;
             background-color: #111;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #444;
+            align-items: center;
         }
         .sidebar-header h2 {
             margin: 0;
+        }
+        .sidebar-header button {
+            background: none;
+            color: #fff;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         .sidebar-content {
             flex-grow: 1;
             padding: 1rem;
         }
-        .sidebar-content .menu-item {
+        .menu-item {
             padding: 0.8rem;
             margin: 0.5rem 0;
             background-color: #333;
@@ -84,13 +90,8 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        .sidebar-content .menu-item:hover {
+        .menu-item:hover {
             background-color: #444;
-        }
-        .sidebar-footer {
-            padding: 1rem;
-            border-top: 1px solid #444;
-            text-align: center;
         }
         .banner {
             position: relative;
@@ -121,16 +122,61 @@
             padding: 1rem;
             border-radius: 10px;
             text-align: center;
-            cursor: pointer;
         }
-        .game-card img {
-            width: 100%;
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #222;
+            color: #fff;
+            padding: 2rem;
             border-radius: 10px;
+            width: 400px;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
+        .popup h2 {
+            margin: 0 0 1rem;
+            text-align: center;
+        }
+        .popup label {
+            display: block;
             margin-bottom: 0.5rem;
         }
-        .game-card h3 {
-            font-size: 1rem;
-            margin: 0.5rem 0;
+        .popup input[type="file"],
+        .popup input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+        .popup button {
+            display: block;
+            margin: 1rem auto 0;
+            padding: 0.5rem 1rem;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #444;
+        }
+        .popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -141,23 +187,30 @@
     </header>
 
     <div class="banner">
-        <img src="https://via.placeholder.com/1500x300" alt="Banner">
+        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 1">
+        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 2" style="display: none;">
     </div>
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>Meu Perfil</h2>
-            <button onclick="closeSidebar()" style="background: none; color: #fff; border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+            <button onclick="closeSidebar()">&times;</button>
         </div>
         <div class="sidebar-content">
-            <div class="menu-item">Editar Perfil</div>
-            <div class="menu-item">Meus Jogos</div>
-            <div class="menu-item">Configurações</div>
-            <div class="menu-item">Sair</div>
+            <div class="menu-item" onclick="openPopup()">Editar Perfil</div>
         </div>
-        <div class="sidebar-footer">
-            <small>© 2024 PlayField</small>
-        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <h2>Edite seu Perfil</h2>
+        <label for="upload-img">Foto de Perfil:</label>
+        <input type="file" id="upload-img">
+        <label for="change-name">Alterar Nome:</label>
+        <input type="text" id="change-name" placeholder="Novo nome">
+        <h3>Dispositivos Conectados:</h3>
+        <p id="device-info"></p>
+        <button>Salvar Alterações</button>
     </div>
 
     <main class="game-section">
@@ -172,24 +225,29 @@
                 <h3>Jogo 2</h3>
             </div>
         </div>
-        <h2>Novos Lançamentos</h2>
-        <div class="game-row">
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 3">
-                <h3>Jogo 3</h3>
-            </div>
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 4">
-                <h3>Jogo 4</h3>
-            </div>
-        </div>
     </main>
 
     <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        setInterval(() => {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.display = 'block';
+        }, 5000);
+
+        function openPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
         const profileDiv = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const userName = localStorage.getItem('playfieldUserName') || "U";
-
         profileDiv.textContent = userName.charAt(0).toUpperCase();
 
         profileDiv.addEventListener('click', () => {
@@ -199,6 +257,8 @@
         function closeSidebar() {
             sidebar.classList.remove('open');
         }
+
+        document.getElementById('device-info').textContent = `Dispositivo Atual: ${navigator.platform}, Local: Brasil`;
     </script>
 </body>
 </html>
