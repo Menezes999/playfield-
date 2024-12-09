@@ -38,6 +38,7 @@
             border-radius: 50%;
             cursor: pointer;
             overflow: hidden;
+            display: none; /* Initially hidden */
         }
         .profile img {
             width: 100%;
@@ -295,6 +296,7 @@
         const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
+        let profileImageSaved = false;
 
         function openSidebar() {
             sidebar.classList.add('open');
@@ -333,7 +335,9 @@
             profile.style.backgroundSize = 'cover';
             profile.style.backgroundPosition = 'center';
             profile.textContent = '';
+            profile.style.display = 'block'; // Show profile image after saving
             closePopup();
+            profileImageSaved = true; // Indicate profile image has been saved
         }
 
         window.onload = () => {
@@ -343,6 +347,7 @@
                 profile.style.backgroundSize = 'cover';
                 profile.style.backgroundPosition = 'center';
                 profile.textContent = '';
+                profile.style.display = 'block'; // Show saved profile image on load
             }
         }
     </script>
