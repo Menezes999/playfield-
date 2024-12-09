@@ -206,7 +206,7 @@
 <body>
     <header>
         <h1>PlayField</h1>
-        <div class="profile" id="profile"></div>
+        <div class="profile" id="profile">M</div> <!-- Default profile initial -->
     </header>
 
     <div class="banner">
@@ -223,7 +223,7 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>Meu Perfil</h2>
-            <button onclick="closeSidebar()">&times;</button>
+            <button onclick="closeSidebar()">×</button>
         </div>
         <div class="sidebar-content">
             <div class="menu-item" onclick="openPopup()">Editar Perfil</div>
@@ -231,13 +231,13 @@
     </div>
 
     <div class="popup" id="popup">
-        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <button class="close-btn" onclick="closePopup()">×</button>
         <h2>Edite seu Perfil</h2>
         <div class="file-upload">
-            <input type="file" id="upload-img">
+            <input type="file" id="upload-img" onchange="previewImage(event)">
             <label for="upload-img">Selecione uma nova foto</label>
         </div>
-        <button>Salvar Alterações</button>
+        <button onclick="saveChanges()">Salvar Alterações</button>
     </div>
 
     <main class="game-section">
@@ -281,6 +281,7 @@
         const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
+        const uploadImgInput = document.getElementById('upload-img');
 
         profile.onclick = () => {
             sidebar.classList.add('open');
@@ -296,6 +297,25 @@
 
         function closePopup() {
             popup.style.display = 'none';
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    profile.style.backgroundImage = `url(${reader.result})`;
+                    profile.style.backgroundSize = 'cover';
+                    profile.style.backgroundPosition = 'center';
+                    profile.textContent = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveChanges() {
+            alert('Alterações salvas!');
+            closePopup();
         }
     </script>
 </body>
