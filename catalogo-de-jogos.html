@@ -27,7 +27,7 @@
         }
 
         .logo {
-            width: 140px;
+            width: 80px;
             height: auto;
         }
 
@@ -197,7 +197,13 @@
         }
 
         .drawer input[type="file"] {
-            display: none;
+            display: block;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .drawer button {
@@ -215,6 +221,24 @@
 
         .drawer button:hover {
             background-color: #3f4fb1;
+        }
+
+        .preview-image {
+            margin-top: 15px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Efeitos */
@@ -271,7 +295,10 @@
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <input type="file" id="upload-photo" accept="image/*">
+        <input type="file" id="upload-photo" accept="image/*" onchange="previewImage(event)">
+        <div class="preview-image" id="preview-container">
+            <img src="semfoto.jpg" id="preview-img" alt="Prévia">
+        </div>
         <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
@@ -279,38 +306,41 @@
     <script>
         const drawer = document.getElementById('drawer');
         const profilePic = document.getElementById('profile-pic');
-        const uploadPhotoInput = document.getElementById('upload-photo');
+        const previewImg = document.getElementById('preview-img');
+        const previewContainer = document.getElementById('preview-container');
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
         }
 
-        function saveProfilePhoto() {
-            const file = uploadPhotoInput.files[0];
+        function previewImage(event) {
+            const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = () => {
-                    localStorage.setItem('profilePhoto', reader.result);
-                    profilePic.src = reader.result;
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewContainer.style.display = 'flex';
                 };
                 reader.readAsDataURL(file);
             }
-            toggleDrawer();
         }
 
-        const savedPhoto = localStorage.getItem('profilePhoto');
-        if (savedPhoto) {
-            profilePic.src = savedPhoto;
+        function saveProfilePhoto() {
+            const newImageSrc = previewImg.src;
+            profilePic.src = newImageSrc;
+            toggleDrawer(); // Fechar gaveta
         }
 
-        // Slideshow com fade-out
+        // Slideshow funcional
+        let currentIndex = 0;
         const banners = document.querySelectorAll('.banner img');
         const indicators = document.querySelectorAll('.indicator');
-        let currentIndex = 0;
 
         function changeBanner() {
-            banners[currentIndex].classList.remove('active');
-            indicators[currentIndex].classList.remove('active');
+            banners.forEach((banner, index) => {
+                banner.classList.remove('active');
+                indicators[index].classList.remove('active');
+            });
             currentIndex = (currentIndex + 1) % banners.length;
             banners[currentIndex].classList.add('active');
             indicators[currentIndex].classList.add('active');
