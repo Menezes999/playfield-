@@ -49,6 +49,46 @@
             font-size: 0.9rem;
         }
 
+        /* Slideshow */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .banner img.active {
+            opacity: 1;
+        }
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .indicator.active {
+            opacity: 1;
+        }
+
         /* Gaveta Lateral */
         .drawer {
             position: fixed;
@@ -70,42 +110,6 @@
             font-size: 1.2rem;
             margin: 0 0 1rem;
         }
-        .profile-edit {
-            width: 100px;
-            height: 100px;
-            background-color: #333;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto;
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-        .profile-edit img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-edit input {
-            display: none;
-        }
-
-        .profile-edit span {
-            position: absolute;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .profile-edit:hover {
-            background-color: #444;
-        }
-
         .drawer button {
             display: block;
             width: 100%;
@@ -118,6 +122,47 @@
             cursor: pointer;
         }
         .drawer button:hover {
+            background-color: #ddd;
+        }
+
+        /* Jogos em Destaque */
+        main {
+            padding: 1rem;
+        }
+        h2 {
+            text-align: left;
+            margin-left: 20px;
+        }
+        .games {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+        .game-card {
+            background-color: #222;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 150px;
+            text-align: center;
+        }
+        .game-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .game-card button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .game-card button:hover {
             background-color: #ddd;
         }
     </style>
@@ -133,56 +178,85 @@
         </div>
     </header>
 
+    <div class="banner" id="banner">
+        <img src="banner1.png" alt="Banner 1" class="active">
+        <img src="banner2.png" alt="Banner 2">
+        <img src="banner3.png" alt="Banner 3">
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
+    </div>
+
     <main>
-        <!-- Conteúdo principal omitido -->
+        <h2>Jogos em Destaque</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="jogo1.jpg" alt="Jogo 1">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo2.jpg" alt="Jogo 2">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo3.jpg" alt="Jogo 3">
+                <button>Jogar Agora</button>
+            </div>
+        </div>
     </main>
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <div class="profile-edit" onclick="selectNewPhoto()">
-            <span id="profile-label">Sem Foto</span>
-            <img id="edit-profile-pic" src="semfoto.jpg" alt="Editar Perfil">
-            <input type="file" id="upload-photo" accept="image/*" onchange="updateProfilePhoto()">
-        </div>
+        <input type="file" id="upload-photo" accept="image/*">
+        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
     <script>
         const drawer = document.getElementById('drawer');
         const profilePic = document.getElementById('profile-pic');
-        const editProfilePic = document.getElementById('edit-profile-pic');
         const uploadPhotoInput = document.getElementById('upload-photo');
-        const profileLabel = document.getElementById('profile-label');
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
         }
 
-        function selectNewPhoto() {
-            uploadPhotoInput.click();
-        }
-
-        function updateProfilePhoto() {
+        function saveProfilePhoto() {
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = () => {
                     localStorage.setItem('profilePhoto', reader.result);
                     profilePic.src = reader.result;
-                    editProfilePic.src = reader.result;
-                    profileLabel.style.display = 'none';
                 };
                 reader.readAsDataURL(file);
             }
+            toggleDrawer();
         }
 
-        // Carregar foto de perfil salva
         const savedPhoto = localStorage.getItem('profilePhoto');
         if (savedPhoto) {
             profilePic.src = savedPhoto;
-            editProfilePic.src = savedPhoto;
-            profileLabel.style.display = 'none';
         }
+
+        // Slideshow com fade-out
+        const banners = document.querySelectorAll('.banner img');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+
+        function changeBanner() {
+            banners[currentIndex].classList.remove('active');
+            indicators[currentIndex].classList.remove('active');
+
+            currentIndex = (currentIndex + 1) % banners.length;
+
+            banners[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeBanner, 4000);
     </script>
 </body>
 </html>
