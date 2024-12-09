@@ -8,61 +8,54 @@
         /* Estilos Gerais */
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
             color: #fff;
-            overflow-x: hidden;
         }
-
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background-color: #222;
+            padding: 1rem;
+            background-color: #003366;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .logo {
-            width: 80px;
-            filter: brightness(0) invert(1);
+            width: 120px;
         }
         .profile-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         .profile {
-            width: 45px;
-            height: 45px;
-            background-color: #444;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
             border-radius: 50%;
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            border: 2px solid #444;
-            transition: border 0.3s ease;
-        }
-        .profile:hover {
-            border-color: #00bcd4;
         }
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .welcome {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #f1c40f;
+        }
 
         /* Slideshow */
         .banner {
             position: relative;
             width: 100%;
-            height: 350px;
+            height: 300px;
             overflow: hidden;
-            margin-bottom: 40px;
-            border-radius: 10px;
         }
         .banner img {
             position: absolute;
@@ -107,123 +100,103 @@
             background-color: #222;
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
-            padding: 1.5rem;
+            padding: 1rem;
             z-index: 2000;
             overflow-y: auto;
-            border-radius: 10px 0 0 10px;
         }
         .drawer.open {
             right: 0;
         }
         .drawer h3 {
-            font-size: 1.4rem;
-            margin: 0 0 20px;
-            text-align: center;
-            font-weight: bold;
-            color: #00bcd4;
+            font-size: 1.2rem;
+            margin: 0 0 1rem;
+            color: #f1c40f;
         }
         .drawer button {
             display: block;
             width: 100%;
-            padding: 0.7rem;
+            padding: 0.5rem;
             margin-top: 10px;
-            background-color: #00bcd4;
-            color: #fff;
+            background-color: #f1c40f;
+            color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
         }
         .drawer button:hover {
-            background-color: #0097a7;
-        }
-
-        /* Escolher Foto */
-        .profile-photo-container {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .profile-photo-container img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid #00bcd4;
-            transition: transform 0.3s ease;
-        }
-        .profile-photo-container img:hover {
-            transform: scale(1.1);
-        }
-        .choose-photo-button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .choose-photo-button:hover {
-            background-color: #444;
+            background-color: #e67e22;
         }
 
         /* Jogos em Destaque */
         main {
-            padding: 2rem 1rem;
-            background-color: #111;
-            color: #fff;
+            padding: 1rem;
         }
         h2 {
-            font-size: 1.8rem;
             text-align: left;
             margin-left: 20px;
-            font-weight: bold;
-            color: #00bcd4;
+            color: #f1c40f;
         }
         .games {
             display: flex;
             flex-wrap: nowrap;
-            gap: 20px;
+            gap: 10px;
             overflow-x: auto;
             padding: 10px;
-            margin-top: 20px;
         }
         .game-card {
-            background-color: #222;
-            padding: 15px;
+            background-color: #003366;
+            padding: 10px;
             border-radius: 10px;
-            min-width: 180px;
+            min-width: 150px;
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .game-card:hover {
-            transform: scale(1.05);
         }
         .game-card img {
             width: 100%;
-            height: 120px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 5px;
         }
         .game-card button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #00bcd4;
-            color: #fff;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #f1c40f;
+            color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
         }
         .game-card button:hover {
-            background-color: #0097a7;
+            background-color: #e67e22;
+        }
+
+        /* Formulário de Upload de Foto */
+        .profile-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .profile-upload img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #f1c40f;
+        }
+        .profile-upload input[type="file"] {
+            display: none;
+        }
+        .profile-upload label {
+            background-color: #f1c40f;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .profile-upload label:hover {
+            background-color: #e67e22;
         }
 
     </style>
@@ -270,70 +243,61 @@
 
     <div class="drawer" id="drawer">
         <h3>Editar Perfil</h3>
-        <div class="profile-photo-container">
-            <img id="profile-preview" src="semfoto.jpg" alt="Pré-visualização da Foto">
-            <input type="file" id="upload-photo" accept="image/*" style="display: none;" onchange="previewProfilePhoto()">
-            <button class="choose-photo-button" onclick="document.getElementById('upload-photo').click()">Escolher Foto</button>
+        <div class="profile-upload">
+            <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
+            <input type="file" id="upload-photo" accept="image/*">
+            <label for="upload-photo">Escolher Foto</label>
+            <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         </div>
-        <button onclick="saveProfilePhoto()">Salvar Alterações</button>
         <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
     <script>
         const drawer = document.getElementById('drawer');
         const profilePic = document.getElementById('profile-pic');
-        const profilePreview = document.getElementById('profile-preview');
         const uploadPhotoInput = document.getElementById('upload-photo');
+        const profilePreview = document.getElementById('profile-preview');
 
         function toggleDrawer() {
             drawer.classList.toggle('open');
-        }
-
-        function previewProfilePhoto() {
-            const file = uploadPhotoInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePreview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
         }
 
         function saveProfilePhoto() {
             const file = uploadPhotoInput.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    localStorage.setItem('profilePic', e.target.result);
-                    profilePic.src = e.target.result;
-                    toggleDrawer();
+                reader.onload = () => {
+                    localStorage.setItem('profilePhoto', reader.result);
+                    profilePic.src = reader.result;
+                    profilePreview.src = reader.result;
                 };
                 reader.readAsDataURL(file);
             }
+            toggleDrawer();
         }
 
-        // Load saved profile picture
-        window.onload = function() {
-            const savedProfilePic = localStorage.getItem('profilePic');
-            if (savedProfilePic) {
-                profilePic.src = savedProfilePic;
-                profilePreview.src = savedProfilePic;
-            }
-        };
+        const savedPhoto = localStorage.getItem('profilePhoto');
+        if (savedPhoto) {
+            profilePic.src = savedPhoto;
+            profilePreview.src = savedPhoto;
+        }
 
-        // Slideshow
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.banner img');
+        // Slideshow com fade-out
+        const banners = document.querySelectorAll('.banner img');
         const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
 
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            indicators[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-        }, 5000);
+        function changeBanner() {
+            banners[currentIndex].classList.remove('active');
+            indicators[currentIndex].classList.remove('active');
+
+            currentIndex = (currentIndex + 1) % banners.length;
+
+            banners[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeBanner, 4000);
     </script>
 </body>
 </html>
