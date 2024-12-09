@@ -12,6 +12,7 @@
             background-color: #000;
             color: #fff;
         }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -22,14 +23,17 @@
             top: 0;
             z-index: 1000;
         }
+
         .logo {
             width: 120px;
         }
+
         .profile-section {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .profile {
             width: 40px;
             height: 40px;
@@ -42,12 +46,14 @@
             justify-content: center;
             align-items: center;
         }
+
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: none; /* Inicialmente a imagem é invisível */
         }
+
         .profile .default-image {
             width: 100%;
             height: 100%;
@@ -57,6 +63,7 @@
             align-items: center;
             position: relative;
         }
+
         .profile .default-image::before {
             content: "Enviar Foto";
             position: absolute;
@@ -64,47 +71,11 @@
             font-weight: bold;
             font-size: 1rem;
         }
+
         .profile input[type="file"] {
             display: none; /* Oculta o input de arquivo */
         }
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-        .banner img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .banner img.active {
-            opacity: 1;
-        }
-        .indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #fff;
-            border-radius: 50%;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        .indicator.active {
-            opacity: 1;
-        }
+
     </style>
 </head>
 <body>
@@ -120,17 +91,6 @@
             </div>
         </div>
     </header>
-
-    <div class="banner" id="banner">
-        <img src="banner1.png" alt="Banner 1" class="active">
-        <img src="banner2.png" alt="Banner 2">
-        <img src="banner3.png" alt="Banner 3">
-        <div class="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-        </div>
-    </div>
 
     <script>
         const profilePic = document.getElementById('profile-pic');
@@ -150,23 +110,6 @@
                 reader.readAsDataURL(file);
             }
         }
-
-        // Slideshow com fade-out
-        const banners = document.querySelectorAll('.banner img');
-        const indicators = document.querySelectorAll('.indicator');
-        let currentIndex = 0;
-
-        function changeBanner() {
-            banners[currentIndex].classList.remove('active');
-            indicators[currentIndex].classList.remove('active');
-
-            currentIndex = (currentIndex + 1) % banners.length;
-
-            banners[currentIndex].classList.add('active');
-            indicators[currentIndex].classList.add('active');
-        }
-
-        setInterval(changeBanner, 4000);
     </script>
 </body>
 </html>
