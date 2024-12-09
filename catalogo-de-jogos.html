@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayField - Catálogo</title>
     <style>
+        /* Estilos principais */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -93,54 +94,6 @@
         .menu-item:hover {
             background-color: #444;
         }
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-        .banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 5px;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            background-color: #444;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .dot.active {
-            background-color: #fff;
-        }
-        .game-section {
-            padding: 1rem;
-        }
-        .game-section h2 {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-        .game-row {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-        }
-        .game-card {
-            min-width: 200px;
-            background-color: #222;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-        }
         .popup {
             position: fixed;
             top: 50%;
@@ -158,19 +111,6 @@
         .popup h2 {
             margin: 0 0 1rem;
             text-align: center;
-        }
-        .popup button {
-            display: block;
-            margin: 1rem auto 0;
-            padding: 0.5rem 1rem;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .popup button:hover {
-            background-color: #444;
         }
         .popup .close-btn {
             position: absolute;
@@ -201,6 +141,13 @@
         .file-upload label:hover {
             background-color: #444;
         }
+        .file-upload img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -208,17 +155,6 @@
         <h1>PlayField</h1>
         <div class="profile" id="profile"></div>
     </header>
-
-    <div class="banner">
-        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 1">
-        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 2" style="display: none;">
-        <img src="https://via.placeholder.com/1500x300" class="slide" alt="Banner 3" style="display: none;">
-        <div class="dots">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
-        </div>
-    </div>
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -234,68 +170,54 @@
         <button class="close-btn" onclick="closePopup()">&times;</button>
         <h2>Edite seu Perfil</h2>
         <div class="file-upload">
-            <input type="file" id="upload-img">
+            <img id="preview-img" src="" alt="Foto de perfil">
+            <input type="file" id="upload-img" accept="image/*" onchange="updateProfileImage(event)">
             <label for="upload-img">Selecione uma nova foto</label>
         </div>
-        <button>Salvar Alterações</button>
+        <button onclick="saveProfile()">Salvar Alterações</button>
     </div>
 
-    <main class="game-section">
-        <h2>Jogos em Destaque</h2>
-        <div class="game-row">
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 1">
-                <h3>Jogo 1</h3>
-            </div>
-            <div class="game-card">
-                <img src="https://via.placeholder.com/200x120" alt="Jogo 2">
-                <h3>Jogo 2</h3>
-            </div>
-        </div>
-    </main>
-
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.style.display = index === currentSlide ? 'block' : 'none';
-            });
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlides();
-        }, 4000);
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlides();
-        }
-
         const profile = document.getElementById('profile');
         const sidebar = document.getElementById('sidebar');
         const popup = document.getElementById('popup');
+        const previewImg = document.getElementById('preview-img');
 
-        profile.onclick = () => {
-            sidebar.classList.add('open');
-        };
+        // Configurações iniciais
+        const userName = prompt("Digite seu nome:");
+        profile.textContent = userName[0].toUpperCase(); // Inicial do nome como avatar padrão
 
+        // Ações da sidebar
+        profile.onclick = () => sidebar.classList.add('open');
         function closeSidebar() {
             sidebar.classList.remove('open');
         }
 
+        // Ações do pop-up
         function openPopup() {
             popup.style.display = 'block';
         }
 
         function closePopup() {
             popup.style.display = 'none';
+        }
+
+        // Atualizar imagem de perfil
+        function updateProfileImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    previewImg.src = reader.result;
+                    profile.style.backgroundImage = `url('${reader.result}')`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Salvar alterações
+        function saveProfile() {
+            closePopup();
         }
     </script>
 </body>
