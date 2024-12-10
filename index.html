@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayField - Home</title>
     <style>
-        /* Reset básico e fonte */
         * {
             margin: 0;
             padding: 0;
@@ -24,47 +23,32 @@
             overflow: hidden;
         }
         
-        /* Efeitos de gradiente no fundo */
+        /* Fundo sólido e com efeito sutil */
         .background {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #1e90ff, #ffcc00);
+            background: linear-gradient(135deg, #003366, #ffcc00);
             z-index: -1;
-            filter: blur(8px);
-            animation: gradientAnimation 5s ease infinite;
-        }
-
-        @keyframes gradientAnimation {
-            0% {
-                background: linear-gradient(135deg, #ffcc00, #1e90ff);
-            }
-            50% {
-                background: linear-gradient(135deg, #1e90ff, #ffcc00);
-            }
-            100% {
-                background: linear-gradient(135deg, #ffcc00, #1e90ff);
-            }
+            filter: blur(10px);
         }
 
         h1 {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            margin-bottom: 1rem;
             color: #ffcc00;
-            text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
             font-weight: 700;
+            letter-spacing: 2px;
         }
 
         p {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             margin-bottom: 2rem;
-            color: #bbb;
-            font-weight: 300;
+            color: #ddd;
+            font-weight: 400;
             line-height: 1.5;
-            letter-spacing: 1px;
         }
 
         .buttons {
@@ -77,24 +61,24 @@
         .buttons a {
             text-decoration: none;
             color: #fff;
-            background-color: #1e90ff;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            background-color: #003366;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
             text-transform: uppercase;
+            border: 2px solid transparent;
         }
 
         .buttons a:hover {
-            background-color: #1c86e6;
-            transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+            background-color: #002244;
+            transform: translateY(-4px);
+            border: 2px solid #ffcc00;
         }
 
         .buttons a:active {
-            transform: scale(0.98);
+            transform: translateY(0);
         }
 
         .buttons a:focus {
@@ -102,7 +86,6 @@
             box-shadow: 0 0 0 4px #ffcc00;
         }
 
-        /* Animação suave de entrada */
         .content {
             animation: fadeIn 2s ease-in-out;
         }
@@ -124,7 +107,7 @@
                 font-size: 3rem;
             }
             p {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             .buttons {
                 flex-direction: column;
@@ -137,7 +120,7 @@
     <div class="background"></div>
     <div class="content">
         <h1>PlayField</h1>
-        <p>O site perfeito para gamers, e developers!</p>
+        <p>O site perfeito para gamers e developers!</p>
         <div class="buttons">
             <a href="cadastroo.html">Jogue Agora</a>
             <a href="formulario.html">Envie seu Jogo</a>
