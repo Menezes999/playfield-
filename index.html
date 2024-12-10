@@ -15,6 +15,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
         .container {
             text-align: center;
@@ -101,6 +102,45 @@
             color: #888;
             font-size: 0.9rem;
         }
+
+        /* Pop-up e fundo desfocado */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup {
+            background-color: #333;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+        .popup h2 {
+            color: #ffcc00;
+            margin-bottom: 1.5rem;
+        }
+        .popup button {
+            margin: 0 1rem;
+            padding: 0.8rem 2rem;
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #ffc107;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +160,15 @@
         <a href="catalogo-de-jogos.html" class="link">Continuar sem cadastro</a>
     </div>
 
+    <!-- Pop-up -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <h2>Você quer permanecer conectado na próxima vez que entrar no PlayField?</h2>
+            <button id="yesButton">Sim</button>
+            <button id="noButton">Não</button>
+        </div>
+    </div>
+
     <script>
         // Função para verificar se o usuário está marcado como conectado
         const checkLoggedIn = () => {
@@ -131,6 +180,16 @@
 
         // Verifica se o usuário está logado automaticamente
         checkLoggedIn();
+
+        // Função para exibir o pop-up
+        const showPopup = () => {
+            document.getElementById('popup-overlay').style.display = 'flex';
+        };
+
+        // Função para esconder o pop-up
+        const hidePopup = () => {
+            document.getElementById('popup-overlay').style.display = 'none';
+        };
 
         // Função de cadastro/login
         document.getElementById('register').addEventListener('click', () => {
@@ -148,21 +207,34 @@
             if (savedPassword) {
                 if (savedPassword === password) {
                     if (keepLogged) {
-                        localStorage.setItem('playfieldKeepLogged', 'true');
+                        showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
+                    } else {
+                        window.location.href = 'catalogo-de-jogos.html';
                     }
-                    alert('Login bem-sucedido!');
-                    window.location.href = 'catalogo-de-jogos.html';
                 } else {
                     alert('Senha incorreta. Caso continue com problemas, entre em contato no Discord: galakyz');
                 }
             } else {
                 localStorage.setItem(`playfieldUser_${name}`, password);
                 if (keepLogged) {
-                    localStorage.setItem('playfieldKeepLogged', 'true');
+                    showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
+                } else {
+                    window.location.href = 'catalogo-de-jogos.html';
                 }
-                alert('Cadastro realizado com sucesso!');
-                window.location.href = 'catalogo-de-jogos.html';
             }
+        });
+
+        // Ações do pop-up
+        document.getElementById('yesButton').addEventListener('click', () => {
+            localStorage.setItem('playfieldKeepLogged', 'true');
+            hidePopup();
+            window.location.href = 'catalogo-de-jogos.html';
+        });
+
+        document.getElementById('noButton').addEventListener('click', () => {
+            localStorage.removeItem('playfieldKeepLogged');
+            hidePopup();
+            window.location.href = 'catalogo-de-jogos.html';
         });
     </script>
 </body>
