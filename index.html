@@ -21,26 +21,38 @@
             height: 100vh;
             text-align: center;
             overflow: hidden;
+            padding: 0 20px;
         }
-        
-        /* Fundo sólido e com efeito sutil */
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #003366, #ffcc00);
-            z-index: -1;
-            filter: blur(10px);
+
+        /* Logo centralizada e com animação */
+        .logo {
+            width: 200px;
+            margin-bottom: 30px;
+            animation: logoAnimation 2s ease-out;
+        }
+
+        @keyframes logoAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             color: #ffcc00;
             font-weight: 700;
             letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards 1s;
         }
 
         p {
@@ -48,7 +60,8 @@
             margin-bottom: 2rem;
             color: #ddd;
             font-weight: 400;
-            line-height: 1.5;
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards 1.5s;
         }
 
         .buttons {
@@ -56,12 +69,14 @@
             gap: 2rem;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards 2s;
         }
 
         .buttons a {
             text-decoration: none;
             color: #fff;
-            background-color: #003366;
+            background-color: #333;
             padding: 1rem 2rem;
             border-radius: 5px;
             font-size: 1.1rem;
@@ -72,7 +87,7 @@
         }
 
         .buttons a:hover {
-            background-color: #002244;
+            background-color: #444;
             transform: translateY(-4px);
             border: 2px solid #ffcc00;
         }
@@ -86,10 +101,7 @@
             box-shadow: 0 0 0 4px #ffcc00;
         }
 
-        .content {
-            animation: fadeIn 2s ease-in-out;
-        }
-
+        /* Animação de fade-in para os elementos */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -104,7 +116,7 @@
         /* Resposta visual para dispositivos móveis */
         @media (max-width: 768px) {
             h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             p {
                 font-size: 1.2rem;
@@ -117,14 +129,17 @@
     </style>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="content">
-        <h1>PlayField</h1>
-        <p>O site perfeito para gamers e developers!</p>
-        <div class="buttons">
-            <a href="cadastroo.html">Jogue Agora</a>
-            <a href="formulario.html">Envie seu Jogo</a>
-        </div>
+    <!-- Logo do site -->
+    <img src="logo.png" alt="Logo PlayField" class="logo">
+
+    <!-- Conteúdo do site -->
+    <h1>PlayField</h1>
+    <p>O site perfeito para gamers e developers!</p>
+    
+    <!-- Botões de navegação -->
+    <div class="buttons">
+        <a href="cadastroo.html">Jogue Agora</a>
+        <a href="formulario.html">Envie seu Jogo</a>
     </div>
 </body>
 </html>
