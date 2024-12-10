@@ -74,6 +74,24 @@
         .link:hover {
             color: #ffc107;
         }
+
+        .button {
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #121212;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #ffc107;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -82,5 +100,6 @@
     </div>
     <h1>O site perfeito para gamers e developers!</h1>
     <p class="link" onclick="window.location.href='formulario.html'">Envie seu Jogo</p>
+    <button class="button" onclick="window.location.href='cadastroo.html'">Jogar Agora</button>
 </body>
 </html>
