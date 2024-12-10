@@ -5,70 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayField - Enviar Jogo</title>
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .header {
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
             padding: 1rem 2rem;
-            background-color: #111;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-bottom: 1px solid #333;
         }
+
         .header h1 {
-            margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            color: #ffcc00;
+            animation: fadeInDown 1.5s ease-out;
         }
+
+        @keyframes fadeInDown {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         .form-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 80vh;
+            justify-content: center;
+            text-align: center;
             padding: 2rem;
+            margin-top: 2rem;
+            animation: fadeIn 2s ease-out;
         }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         .form-container h2 {
-            margin-bottom: 2rem;
-        }
-        .form-container textarea {
-            width: 300px;
-            padding: 1rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            border-radius: 5px;
-            border: 1px solid #333;
-            background-color: #222;
-            color: #fff;
-            min-height: 100px;
+            color: #ffcc00;
         }
-        .form-container input {
-            width: 300px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            border: 1px solid #333;
-            background-color: #222;
-            color: #fff;
-        }
-        .form-container button {
-            width: 300px;
-            padding: 1rem;
-            background-color: #ff6600;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .form-container button:hover {
-            background-color: #e65c00;
-        }
+
         .instructions {
             margin-bottom: 2rem;
             font-size: 1.1rem;
+            line-height: 1.5;
+            color: #ddd;
+            text-align: center;
+        }
+
+        textarea, input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        textarea:focus, input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #ffcc00;
+        }
+
+        button {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6600;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #555;
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -81,7 +155,7 @@
         <h2>Enviar seu Jogo</h2>
         <div class="instructions">
             <p>Para enviar seu jogo, adicione o contato <strong>galakyz</strong> no Discord e envie o jogo por lá.</p>
-            <p>Preencha as informações abaixo e nos envie o jogo para que possamos avaliá-lo.</p>
+            <p>Preencha as informações abaixo para que possamos avaliar seu jogo com mais detalhes.</p>
         </div>
 
         <textarea id="gameDescription" placeholder="Descrição do jogo (Opcional)"></textarea>
@@ -89,6 +163,10 @@
         <input type="text" id="gameLink" placeholder="Link para o Jogo ou Arquivo" required>
         <button id="submitGame">Enviar Jogo</button>
     </div>
+
+    <footer>
+        <p>&copy; 2024 PlayField. Criado para gamers e developers. Visite nosso <a href="#">Discord</a>.</p>
+    </footer>
 
     <script>
         const gameDescription = document.getElementById('gameDescription');
@@ -102,11 +180,7 @@
             const link = gameLink.value.trim();
 
             if (name && link) {
-                
-
                 alert("Jogo enviado com sucesso! Aguarde nossa análise.");
-
-                
                 gameDescription.value = '';
                 gameName.value = '';
                 gameLink.value = '';
