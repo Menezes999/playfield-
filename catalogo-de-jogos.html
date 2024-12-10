@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField - Catálogo</title>
+    <title>PlayField - Página Inicial</title>
     <style>
         /* Estilos Gerais */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;
+            background-color: #2C2F36; /* Cinza escuro para o fundo */
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -18,190 +18,116 @@
 
         /* Header */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 3rem;
-            background-color: #1A1D22;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .logo {
-            width: 120px;
-        }
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .profile {
-            width: 40px;
-            height: 40px;
-            background-color: #444;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-            border: 3px solid #f1c40f;
-            transition: transform 0.3s ease;
-        }
-        .profile:hover {
-            transform: scale(1.1);
-        }
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #f1c40f;
-        }
-
-        /* Jogos em Destaque */
-        .games {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px;
-            flex-wrap: nowrap;
-        }
-        .game-card {
-            background-color: #444;
-            padding: 20px;
-            border-radius: 12px;
-            min-width: 180px;
             text-align: center;
-            transition: transform 0.3s ease;
+            margin-top: 5rem;
         }
-        .game-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .game-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .game-card button {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .game-card button:hover {
-            background-color: #e67e22;
-        }
-
-        /* Pop-Up */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #1A1D22;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1000;
-            width: 90%;
-            max-width: 500px;
-        }
-        .popup h2 {
+        header h1 {
+            font-size: 3rem;
             color: #f1c40f;
-            margin: 0 0 10px;
+            margin: 0;
         }
-        .popup p {
-            margin: 5px 0;
-            line-height: 1.5;
+        header p {
+            font-size: 1.2rem;
+            color: #fff;
+            margin: 1rem 0 2rem;
         }
-        .popup button {
-            margin-top: 15px;
-            background-color: #f1c40f;
+
+        /* Botões */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .buttons button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
             color: #000;
+            background-color: #f1c40f;
             border: none;
             border-radius: 5px;
-            padding: 10px 15px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .popup button:hover {
+        .buttons button:hover {
             background-color: #e67e22;
         }
 
-        /* Overlay */
-        .overlay {
+        /* Modal (Pop-up) */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            z-index: 999;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background-color: #333;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+        .modal-content h2 {
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+        .modal-content p {
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        .modal-content button {
+            padding: 0.8rem 1.5rem;
+            background-color: #f1c40f;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #e67e22;
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="PlayField Logo" class="logo">
-        <div class="profile-section">
-            <p class="welcome">Bem-vindo</p>
-            <div class="profile" id="profile">
-                <img src="semfoto.jpg" alt="Perfil">
-            </div>
-        </div>
+        <h1>PlayField</h1>
+        <p>O site perfeito para gamers e developers!</p>
     </header>
+    <div class="buttons">
+        <button id="play-now">Jogue Agora</button>
+        <button id="submit-game">Envie seu Jogo</button>
+    </div>
 
-    <main>
-        <h2>Jogos em Destaque</h2>
-        <div class="games">
-            <div class="game-card">
-                <img src="jogo1.jpg" alt="Jogo 1">
-                <button onclick="showPopup('Jogo 1', 'Aventura emocionante.', '4GB RAM, Core i3')">Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="jogo2.jpg" alt="Jogo 2">
-                <button onclick="showPopup('Jogo 2', 'FPS cheio de ação.', '8GB RAM, Core i5')">Jogar Agora</button>
-            </div>
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Jogue Agora</h2>
+            <p>Cadastre-se ou faça login para acessar os jogos!</p>
+            <button onclick="closeModal()">Fechar</button>
         </div>
-    </main>
-
-    <div class="overlay" id="overlay" onclick="hidePopup()"></div>
-    <div class="popup" id="popup">
-        <h2 id="game-title"></h2>
-        <p id="game-desc"></p>
-        <p><strong>Requisitos:</strong> <span id="game-reqs"></span></p>
-        <button onclick="downloadGame()">Instalar</button>
     </div>
 
     <script>
-        const overlay = document.getElementById('overlay');
-        const popup = document.getElementById('popup');
-        const gameTitle = document.getElementById('game-title');
-        const gameDesc = document.getElementById('game-desc');
-        const gameReqs = document.getElementById('game-reqs');
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const playNowButton = document.getElementById('play-now');
 
-        function showPopup(title, desc, reqs) {
-            gameTitle.textContent = title;
-            gameDesc.textContent = desc;
-            gameReqs.textContent = reqs;
-            overlay.style.display = 'block';
-            popup.style.display = 'block';
-        }
+        playNowButton.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
 
-        function hidePopup() {
-            overlay.style.display = 'none';
-            popup.style.display = 'none';
-        }
-
-        function downloadGame() {
-            window.location.href = "download.html"; // Página de download.
+        function closeModal() {
+            modal.classList.remove('active');
         }
     </script>
 </body>
