@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #000;
             color: #fff;
             display: flex;
@@ -17,47 +17,86 @@
         }
         .container {
             text-align: center;
-            background-color: #111;
+            background-color: #222;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
             width: 90%;
             max-width: 400px;
+            transition: all 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0 0 25px rgba(255, 102, 0, 0.8);
         }
         .container h1 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ff6600;
+        }
+        .container p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ccc;
         }
         .container input {
             width: 100%;
             padding: 0.8rem;
             margin: 0.5rem 0;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
+            background-color: #333;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .container input:focus {
+            outline: none;
+            border: 2px solid #ff6600;
+            background-color: #444;
         }
         .container button {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.9rem;
             margin-top: 1rem;
             background-color: #ff6600;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         .container button:hover {
             background-color: #e55a00;
+            transform: scale(1.05);
+        }
+        .container button:active {
+            transform: scale(0.98);
         }
         .back-link {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             display: inline-block;
             color: #ff6600;
             text-decoration: none;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
         .back-link:hover {
+            text-decoration: underline;
+            color: #e55a00;
+        }
+        .continue-link {
+            margin-top: 1rem;
+            display: inline-block;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .continue-link:hover {
+            color: #ff6600;
             text-decoration: underline;
         }
     </style>
@@ -70,6 +109,8 @@
         <input type="password" id="password" placeholder="Senha" required>
         <button id="register">Entrar</button>
         <a href="index.html" class="back-link">Voltar para a página inicial</a>
+        <br>
+        <a href="catalogo-de-jogos.html" class="continue-link">Continuar sem cadastro</a>
     </div>
 
     <script>
