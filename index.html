@@ -72,16 +72,14 @@
         .checkbox-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-top: 0.5rem;
+            justify-content: flex-start;
+            margin-top: 1rem;
             color: #ccc;
         }
         .checkbox-container input[type="checkbox"] {
-            margin: 0; /* Removido o espaço para ficar bem colado no texto */
-            padding: 0;
+            margin-right: 10px;
         }
         .checkbox-container label {
-            margin-left: 5px; /* Adicionado para garantir que o texto fique colado ao checkbox */
             font-size: 0.9rem;
         }
         .link {
@@ -120,7 +118,7 @@
     </div>
 
     <script>
-        // Verifica se o usuário está marcado como conectado
+        // Função para verificar se o usuário está marcado como conectado
         const checkLoggedIn = () => {
             const isLoggedIn = localStorage.getItem('playfieldKeepLogged');
             if (isLoggedIn === 'true') {
@@ -128,9 +126,10 @@
             }
         };
 
-        // Verifica a cada carregamento
+        // Verifica se o usuário está logado automaticamente
         checkLoggedIn();
 
+        // Função de cadastro/login
         document.getElementById('register').addEventListener('click', () => {
             const name = document.getElementById('name').value.trim();
             const password = document.getElementById('password').value.trim();
