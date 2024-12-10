@@ -26,7 +26,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .logo {
-            width: 80px;
+            width: 120px;
         }
         .profile-section {
             display: flex;
@@ -293,7 +293,9 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePic.src = e.target.result;
+                    profilePreview.src = e.target.result;
                     localStorage.setItem('profile-photo', e.target.result);
+                    drawer.classList.remove('open');
                 };
                 reader.readAsDataURL(file);
             }
