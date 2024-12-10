@@ -125,6 +125,13 @@
         .popup button:hover {
             background-color: #ffc107;
         }
+
+        /* Flexbox para posicionar os botões lado a lado */
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -144,8 +151,10 @@
     <div class="popup-overlay" id="popup-overlay">
         <div class="popup">
             <h2>Você quer permanecer conectado na próxima vez que entrar no PlayField?</h2>
-            <button id="yesButton">Sim</button>
-            <button id="noButton">Não</button>
+            <div class="popup-buttons">
+                <button id="yesButton">Sim</button>
+                <button id="noButton">Não</button>
+            </div>
         </div>
     </div>
 
