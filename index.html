@@ -7,39 +7,53 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
             color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align: center;
         }
         h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
         }
         p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
+            color: #bbb;
         }
         .buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
+            justify-content: center;
         }
         .buttons a {
             text-decoration: none;
-            color: #000;
-            background-color: #ff6600;
+            color: #fff;
+            background-color: #1e90ff;
             padding: 1rem 2rem;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
         .buttons a:hover {
-            background-color: #ffa500;
+            background-color: #1c86e6;
+            transform: scale(1.05);
+        }
+        .buttons a:active {
+            transform: scale(0.98);
+        }
+        .buttons a:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #ffcc00;
         }
     </style>
 </head>
