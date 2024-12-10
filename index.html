@@ -14,25 +14,37 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
         .container {
             text-align: center;
             background-color: #1f1f1f;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
             width: 90%;
             max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         .logo img {
             height: 60px;
             margin-bottom: 1rem;
         }
-        .container h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
         }
-        .container input {
+        input {
             width: 100%;
             padding: 0.8rem;
             margin: 0.5rem 0;
@@ -42,7 +54,7 @@
             background-color: #2c2c2c;
             color: #fff;
         }
-        .container button {
+        button {
             width: 100%;
             padding: 0.8rem;
             margin-top: 1rem;
@@ -54,18 +66,34 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .container button:hover {
+        button:hover {
             background-color: #ffc107;
         }
-        .back-link {
-            margin-top: 1rem;
-            display: inline-block;
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+            color: #ccc;
+        }
+        .checkbox-container input {
+            margin-right: 0.5rem;
+        }
+        .link {
+            margin-top: 1.5rem;
+            display: block;
             color: #ffcc00;
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: bold;
         }
-        .back-link:hover {
+        .link:hover {
             text-decoration: underline;
+        }
+        .divider {
+            margin: 1rem 0;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -74,17 +102,35 @@
         <div class="logo">
             <img src="logo.png" alt="Logo PlayField">
         </div>
-        <h1>Cadastre-se Primeiro!</h1>
+        <h1>Bem-vindo ao PlayField!</h1>
         <input type="text" id="name" placeholder="Nome" required>
         <input type="password" id="password" placeholder="Senha" required>
+        <div class="checkbox-container">
+            <input type="checkbox" id="keepLogged">
+            <label for="keepLogged">Manter Conectado</label>
+        </div>
         <button id="register">Entrar</button>
-        <a href="index.html" class="back-link">Voltar para a página inicial</a>
+        <p class="divider">ou</p>
+        <a href="catalogo-de-jogos.html" class="link">Continuar sem cadastro</a>
+        <a href="index.html" class="link">Voltar para a página inicial</a>
     </div>
 
     <script>
+        // Verifica se o usuário está marcado como conectado
+        const checkLoggedIn = () => {
+            const isLoggedIn = localStorage.getItem('playfieldKeepLogged');
+            if (isLoggedIn === 'true') {
+                window.location.href = 'catalogo-de-jogos.html';
+            }
+        };
+
+        // Verifica a cada carregamento
+        checkLoggedIn();
+
         document.getElementById('register').addEventListener('click', () => {
             const name = document.getElementById('name').value.trim();
             const password = document.getElementById('password').value.trim();
+            const keepLogged = document.getElementById('keepLogged').checked;
 
             if (!name || !password) {
                 alert('Por favor, preencha todos os campos.');
@@ -95,6 +141,9 @@
 
             if (savedPassword) {
                 if (savedPassword === password) {
+                    if (keepLogged) {
+                        localStorage.setItem('playfieldKeepLogged', 'true');
+                    }
                     alert('Login bem-sucedido!');
                     window.location.href = 'catalogo-de-jogos.html';
                 } else {
@@ -102,6 +151,9 @@
                 }
             } else {
                 localStorage.setItem(`playfieldUser_${name}`, password);
+                if (keepLogged) {
+                    localStorage.setItem('playfieldKeepLogged', 'true');
+                }
                 alert('Cadastro realizado com sucesso!');
                 window.location.href = 'catalogo-de-jogos.html';
             }
