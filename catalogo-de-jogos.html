@@ -3,330 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField</title>
+    <title>PlayField - Catálogo</title>
     <style>
-        
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;  
+            font-family: Arial, sans-serif;
+            background-color: #333;
             color: #fff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
-
-        
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 3rem;
-            background-color: #1A1D22; 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            background-color: #444;
         }
         .logo {
-            width: 80px;
+            width: 120px;
         }
-        .profile-section {
+        .games {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-wrap: nowrap;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 20px;
         }
-        .profile {
-            width: 40px;
-            height: 40px;
-            background-color: #444;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-            border: 3px solid #f1c40f;
-            transition: transform 0.3s ease;
-        }
-        .profile:hover {
-            transform: scale(1.1);
-        }
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #f1c40f;
-        }
-
-        
-        .banner {
+        .game-card {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            text-align: center;
             position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-            margin-top: 1rem;
         }
-        .banner img {
-            position: absolute;
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .game-card button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .game-card button:hover {
+            background-color: #005f7a;
+        }
+        .modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .banner img.active {
-            opacity: 1;
-        }
-        .indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
-            gap: 10px;
-        }
-        .indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #fff;
-            border-radius: 50%;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        .indicator.active {
-            opacity: 1;
-        }
-
-        
-        .drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100%;
-            background-color: #333;
-            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s ease;
-            padding: 1rem;
-            z-index: 2000;
-            overflow-y: auto;
-        }
-        .drawer.open {
-            right: 0;
-        }
-        .drawer h3 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem;
-            color: #f1c40f;
-            text-align: center;
-        }
-        .drawer button {
-            display: block;
-            width: 100%;
-            padding: 0.5rem;
-            margin-top: 10px;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .drawer button:hover {
-            background-color: #e67e22;
-        }
-
-        
-        main {
-            padding: 2rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        h2 {
-            text-align: left;
-            color: #f1c40f;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #f1c40f;
-            padding-bottom: 0.5rem;
-        }
-        .games {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px;
-            flex-wrap: nowrap;
-        }
-        .game-card {
-            background-color: #444;
-            padding: 20px;
-            border-radius: 12px;
-            min-width: 180px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .game-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .game-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .game-card button {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .game-card button:hover {
-            background-color: #e67e22;
-        }
-
-        
-        .profile-upload {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
-        }
-        .profile-upload img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #f1c40f;
-        }
-        .profile-upload input[type="file"] {
+            justify-content: center;
+            z-index: 1000;
             display: none;
         }
-        .profile-upload label {
-            background-color: #f1c40f;
-            color: #000;
-            padding: 12px 20px;
+        .modal-content {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            text-align: left;
+        }
+        .modal h2 {
+            margin: 0 0 10px;
+        }
+        .modal p {
+            margin: 5px 0;
+        }
+        .modal button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .modal .install-btn {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
         }
-        .profile-upload label:hover {
-            background-color: #e67e22;
+        .modal .install-btn:hover {
+            background-color: #005f7a;
         }
 
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #555;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 30px;
+            background-color: #008CBA;
+            width: 0%;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <header>
         <img src="logo.png" alt="PlayField Logo" class="logo">
-        <div class="profile-section">
-            <p class="welcome">Bem-vindo</p>
-            <div class="profile" id="profile" onclick="toggleDrawer()">
-                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
-            </div>
-        </div>
     </header>
 
-    <div class="banner" id="banner">
-        <img src="banner1.png" alt="Banner 1" class="active">
-        <img src="banner2.png" alt="Banner 2">
-        <img src="banner3.png" alt="Banner 3">
-        <div class="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-        </div>
-    </div>
-
     <main>
-        <h2>Jogos em Destaque</h2>
+        <h2 style="text-align: center;">Jogos em Destaque</h2>
         <div class="games">
-            <div class="game-card">
+            <div class="game-card" data-name="Jogo 1" data-desc="Um jogo emocionante de aventura!" data-req="Requisitos: 4GB RAM, 2GHz CPU, 1GB GPU.">
                 <img src="jogo1.jpg" alt="Jogo 1">
-                <button>Jogar Agora</button>
+                <button onclick="openModal(this)">Jogar</button>
             </div>
-            <div class="game-card">
+            <div class="game-card" data-name="Jogo 2" data-desc="Um RPG épico no mundo medieval." data-req="Requisitos: 8GB RAM, 3GHz CPU, 2GB GPU.">
                 <img src="jogo2.jpg" alt="Jogo 2">
-                <button>Jogar Agora</button>
+                <button onclick="openModal(this)">Jogar</button>
             </div>
-            <div class="game-card">
+            <div class="game-card" data-name="Jogo 3" data-desc="Corridas intensas e muita adrenalina." data-req="Requisitos: 6GB RAM, 2.5GHz CPU, 1.5GB GPU.">
                 <img src="jogo3.jpg" alt="Jogo 3">
-                <button>Jogar Agora</button>
+                <button onclick="openModal(this)">Jogar</button>
             </div>
         </div>
     </main>
 
-    <div class="drawer" id="drawer">
-        <h3>Editar Perfil</h3>
-        <div class="profile-upload">
-            <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
-            <input type="file" id="upload-photo" accept="image/*" onchange="updatePreview(event)">
-            <label for="upload-photo">Escolher Foto</label>
-            <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+    <!-- Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <button onclick="closeModal()">&times;</button>
+            <h2 id="gameTitle">Título do Jogo</h2>
+            <p id="gameDesc">Descrição do Jogo</p>
+            <p id="gameReq">Requisitos</p>
+            <button class="install-btn" onclick="startDownload()">INSTALAR</button>
         </div>
-        <button onclick="toggleDrawer()">Fechar</button>
+    </div>
+
+    <!-- Página de Download -->
+    <div id="downloadPage" style="display:none; text-align: center;">
+        <h2>Baixando o jogo...</h2>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
     </div>
 
     <script>
-        const drawer = document.getElementById('drawer');
-        const profilePic = document.getElementById('profile-pic');
-        const uploadPhotoInput = document.getElementById('upload-photo');
-        const profilePreview = document.getElementById('profile-preview');
-        const indicators = document.querySelectorAll('.indicator');
-        const bannerImages = document.querySelectorAll('.banner img');
-        let currentImageIndex = 0;
+        const modal = document.getElementById('gameModal');
+        const downloadPage = document.getElementById('downloadPage');
+        const progressBar = document.getElementById('progressBar');
 
-        function toggleDrawer() {
-            drawer.classList.toggle('open');
+        function openModal(button) {
+            const gameCard = button.parentElement;
+            document.getElementById('gameTitle').innerText = gameCard.dataset.name;
+            document.getElementById('gameDesc').innerText = gameCard.dataset.desc;
+            document.getElementById('gameReq').innerText = gameCard.dataset.req;
+            modal.style.display = 'flex';
         }
 
-        function saveProfilePhoto() {
-            const file = uploadPhotoInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePic.src = e.target.result;
-                    profilePreview.src = e.target.result;
-                    localStorage.setItem('profile-photo', e.target.result);
-                    drawer.classList.remove('open');
-                };
-                reader.readAsDataURL(file);
-            }
+        function closeModal() {
+            modal.style.display = 'none';
         }
 
-        function updatePreview(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePreview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
+        function startDownload() {
+            modal.style.display = 'none';
+            downloadPage.style.display = 'block';
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = progress + '%';
+                progressBar.innerText = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    alert('Download concluído!');
+                    downloadPage.style.display = 'none';
+                }
+            }, 200);
         }
-
-        window.onload = function() {
-            const savedPhoto = localStorage.getItem('profile-photo');
-            if (savedPhoto) {
-                profilePic.src = savedPhoto;
-                profilePreview.src = savedPhoto;
-            }
-
-            setInterval(() => {
-                bannerImages[currentImageIndex].classList.remove('active');
-                indicators[currentImageIndex].classList.remove('active');
-                currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
-                bannerImages[currentImageIndex].classList.add('active');
-                indicators[currentImageIndex].classList.add('active');
-            }, 3000);
-        };
     </script>
 </body>
 </html>
