@@ -70,22 +70,6 @@
         button:hover {
             background-color: #ffc107;
         }
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1rem;
-            background-color: #333;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .checkbox-container input[type="checkbox"] {
-            margin: 0 5px 0 0;
-        }
-        .checkbox-container label {
-            font-size: 0.9rem;
-            color: #ccc;
-        }
         .link {
             margin-top: 1.5rem;
             display: block;
@@ -151,10 +135,6 @@
         <h1>Bem-vindo ao PlayField!</h1>
         <input type="text" id="name" placeholder="Nome" required>
         <input type="password" id="password" placeholder="Senha" required>
-        <div class="checkbox-container">
-            <input type="checkbox" id="keepLogged">
-            <label for="keepLogged">Manter Conectado</label>
-        </div>
         <button id="register">Entrar</button>
         <p class="divider">ou</p>
         <a href="catalogo-de-jogos.html" class="link">Continuar sem cadastro</a>
@@ -195,7 +175,6 @@
         document.getElementById('register').addEventListener('click', () => {
             const name = document.getElementById('name').value.trim();
             const password = document.getElementById('password').value.trim();
-            const keepLogged = document.getElementById('keepLogged').checked;
 
             if (!name || !password) {
                 alert('Por favor, preencha todos os campos.');
@@ -206,21 +185,13 @@
 
             if (savedPassword) {
                 if (savedPassword === password) {
-                    if (keepLogged) {
-                        showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
-                    } else {
-                        window.location.href = 'catalogo-de-jogos.html';
-                    }
+                    showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
                 } else {
                     alert('Senha incorreta. Caso continue com problemas, entre em contato no Discord: galakyz');
                 }
             } else {
                 localStorage.setItem(`playfieldUser_${name}`, password);
-                if (keepLogged) {
-                    showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
-                } else {
-                    window.location.href = 'catalogo-de-jogos.html';
-                }
+                showPopup();  // Exibe o pop-up para perguntar sobre manter conectado
             }
         });
 
