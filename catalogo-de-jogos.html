@@ -190,6 +190,37 @@
             background-color: #e67e22;
         }
 
+        /* Formulário de Upload de Foto */
+        .profile-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .profile-upload img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #f1c40f;
+        }
+        .profile-upload input[type="file"] {
+            display: none;
+        }
+        .profile-upload label {
+            background-color: #f1c40f;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .profile-upload label:hover {
+            background-color: #e67e22;
+        }
+
     </style>
 </head>
 <body>
@@ -203,12 +234,23 @@
         </div>
     </header>
 
+    <div class="banner" id="banner">
+        <img src="banner1.png" alt="Banner 1" class="active">
+        <img src="banner2.png" alt="Banner 2">
+        <img src="banner3.png" alt="Banner 3">
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
+    </div>
+
     <main>
         <h2>Jogos em Destaque</h2>
         <div class="games">
             <div class="game-card">
                 <img src="jogo1.jpg" alt="Jogo 1">
-                <button onclick="window.location.href='download.html'">Jogar Agora</button>
+                <button>Jogar Agora</button>
             </div>
             <div class="game-card">
                 <img src="jogo2.jpg" alt="Jogo 2">
@@ -220,5 +262,71 @@
             </div>
         </div>
     </main>
+
+    <div class="drawer" id="drawer">
+        <h3>Editar Perfil</h3>
+        <div class="profile-upload">
+            <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
+            <input type="file" id="upload-photo" accept="image/*" onchange="updatePreview(event)">
+            <label for="upload-photo">Escolher Foto</label>
+            <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+        </div>
+        <button onclick="toggleDrawer()">Fechar</button>
+    </div>
+
+    <script>
+        const drawer = document.getElementById('drawer');
+        const profilePic = document.getElementById('profile-pic');
+        const uploadPhotoInput = document.getElementById('upload-photo');
+        const profilePreview = document.getElementById('profile-preview');
+        const indicators = document.querySelectorAll('.indicator');
+        const bannerImages = document.querySelectorAll('.banner img');
+        let currentImageIndex = 0;
+
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+        }
+
+        function saveProfilePhoto() {
+            const file = uploadPhotoInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                    profilePreview.src = e.target.result;
+                    localStorage.setItem('profile-photo', e.target.result);
+                    drawer.classList.remove('open');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updatePreview(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.onload = function() {
+            const savedPhoto = localStorage.getItem('profile-photo');
+            if (savedPhoto) {
+                profilePic.src = savedPhoto;
+                profilePreview.src = savedPhoto;
+            }
+
+            setInterval(() => {
+                bannerImages[currentImageIndex].classList.remove('active');
+                indicators[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
+                bannerImages[currentImageIndex].classList.add('active');
+                indicators[currentImageIndex].classList.add('active');
+            }, 3000);
+        };
+    </script>
 </body>
 </html>
