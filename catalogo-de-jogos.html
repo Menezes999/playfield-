@@ -28,97 +28,85 @@
         .logo {
             width: 120px;
         }
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .profile {
-            width: 40px;
-            height: 40px;
-            background-color: #444;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-            border: 3px solid #f1c40f;
-            transition: transform 0.3s ease;
-        }
-        .profile:hover {
-            transform: scale(1.1);
-        }
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #f1c40f;
-        }
 
-        /* Gaveta Lateral */
-        .drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100%;
-            background-color: #333;
-            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s ease;
-            padding: 1rem;
-            z-index: 2000;
-            overflow-y: auto;
+        /* Jogos em Destaque */
+        main {
+            padding: 2rem 3rem;
         }
-        .drawer.open {
-            right: 0;
-        }
-        .drawer h3 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem;
+        h2 {
             color: #f1c40f;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 0.5rem;
+        }
+        .games {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+        }
+        .game-card {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 180px;
             text-align: center;
         }
-        .drawer button {
-            display: block;
+        .game-card img {
             width: 100%;
-            padding: 0.5rem;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .game-card button {
             margin-top: 10px;
+            padding: 8px 12px;
             background-color: #f1c40f;
             color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .drawer button:hover {
-            background-color: #e67e22;
         }
 
-        /* Estilo do Pop-up */
-        .popup {
+        /* Modal */
+        .modal {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #444;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
             display: none;
-            z-index: 3000;
-            text-align: center;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
         }
-        .popup button {
-            margin-top: 15px;
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background-color: #1A1D22;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            width: 90%;
+            max-width: 400px;
+        }
+        .modal-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .modal-content button {
+            margin-top: 10px;
             padding: 10px 20px;
             background-color: #f1c40f;
+            color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-        .popup button:hover {
+        .modal-content button:hover {
             background-color: #e67e22;
         }
     </style>
@@ -126,48 +114,47 @@
 <body>
     <header>
         <img src="logo.png" alt="PlayField Logo" class="logo">
-        <div class="profile-section">
-            <p class="welcome">Bem-vindo</p>
-            <div class="profile" id="profile" onclick="toggleDrawer()">
-                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
-            </div>
-        </div>
     </header>
 
-    <div class="drawer" id="drawer">
-        <h3>Editar Perfil</h3>
-        <div class="profile-upload">
-            <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
-            <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+    <main>
+        <h2>Jogos em Destaque</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="jogo1.jpg" alt="Jogo 1">
+                <button onclick="openModal('jogo1.jpg', 'Jogo 1', 'Este é um jogo incrível para você se divertir!')">Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo2.jpg" alt="Jogo 2">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo3.jpg" alt="Jogo 3">
+                <button>Jogar Agora</button>
+            </div>
         </div>
-        <button onclick="showPopup()">Fechar</button>
-    </div>
+    </main>
 
-    <div class="popup" id="popup">
-        <p>Tem certeza de que deseja fechar?</p>
-        <button onclick="confirmClose()">Sim</button>
-        <button onclick="closePopup()">Cancelar</button>
+    <!-- Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Game Image">
+            <h3 id="modalTitle"></h3>
+            <button>Instalar</button>
+            <p id="modalDescription"></p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
     </div>
 
     <script>
-        const drawer = document.getElementById('drawer');
-        const popup = document.getElementById('popup');
-
-        function toggleDrawer() {
-            drawer.classList.toggle('open');
+        function openModal(imageSrc, title, description) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('gameModal').classList.add('active');
         }
 
-        function showPopup() {
-            popup.style.display = 'block';
-        }
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        function confirmClose() {
-            popup.style.display = 'none';
-            drawer.classList.remove('open');
+        function closeModal() {
+            document.getElementById('gameModal').classList.remove('active');
         }
     </script>
 </body>
