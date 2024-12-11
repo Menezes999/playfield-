@@ -9,30 +9,32 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;  /* Cinza escuro para o fundo */
+            background-color: #2C2F36;
             color: #fff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 3rem;
-            background-color: #1A1D22; /* Tom mais escuro de cinza */
+            background-color: #1A1D22;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
+
         .logo {
-            width: 120px;
+            font-size: 1.5rem;
+            color: #f1c40f;
         }
+
         .profile-section {
             display: flex;
             align-items: center;
-            gap: 15px;
         }
+
         .profile {
             width: 40px;
             height: 40px;
@@ -41,23 +43,14 @@
             overflow: hidden;
             cursor: pointer;
             border: 3px solid #f1c40f;
-            transition: transform 0.3s ease;
         }
-        .profile:hover {
-            transform: scale(1.1);
-        }
+
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .welcome {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #f1c40f;
-        }
 
-        /* Slideshow */
         .banner {
             position: relative;
             width: 100%;
@@ -65,6 +58,7 @@
             overflow: hidden;
             margin-top: 1rem;
         }
+
         .banner img {
             position: absolute;
             top: 0;
@@ -75,30 +69,11 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
+
         .banner img.active {
             opacity: 1;
         }
-        .indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #fff;
-            border-radius: 50%;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        .indicator.active {
-            opacity: 1;
-        }
 
-        /* Gaveta Lateral */
         .drawer {
             position: fixed;
             top: 0;
@@ -109,30 +84,27 @@
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
             padding: 1rem;
-            z-index: 2000;
-            overflow-y: auto;
+            z-index: 1000;
         }
+
         .drawer.open {
             right: 0;
         }
-        .drawer h3 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem;
+
+        .drawer h2 {
             color: #f1c40f;
-            text-align: center;
+            margin-bottom: 1rem;
         }
+
         .drawer button {
-            display: block;
-            width: 100%;
+            margin-top: 1rem;
             padding: 0.5rem;
-            margin-top: 10px;
             background-color: #f1c40f;
-            color: #000;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
         }
+
         .drawer button:hover {
             background-color: #e67e22;
         }
@@ -140,11 +112,10 @@
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="PlayField Logo" class="logo">
+        <div class="logo">PlayField</div>
         <div class="profile-section">
-            <p class="welcome">Bem-vindo</p>
-            <div class="profile" id="profile" onclick="toggleDrawer()">
-                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
+            <div class="profile" id="profile">
+                <img src="semfoto.jpg" alt="Foto de Perfil">
             </div>
         </div>
     </header>
@@ -153,52 +124,37 @@
         <img src="banner1.png" alt="Banner 1" class="active">
         <img src="banner2.png" alt="Banner 2">
         <img src="banner3.png" alt="Banner 3">
-        <div class="indicators" id="indicators"></div>
+    </div>
+
+    <div class="drawer" id="drawer">
+        <h2>Meu Perfil</h2>
+        <p>Configurações do usuário</p>
+        <button>Sair</button>
     </div>
 
     <script>
         // Slideshow
         let currentSlide = 0;
         const slides = document.querySelectorAll(".banner img");
-        const indicators = document.querySelector(".indicators");
 
-        function createIndicators() {
-            slides.forEach((_, index) => {
-                const dot = document.createElement("div");
-                dot.classList.add("indicator");
-                if (index === 0) dot.classList.add("active");
-                indicators.appendChild(dot);
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
             });
         }
 
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle("active", index === currentSlide);
-                indicators.children[index].classList.toggle("active", index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
+        setInterval(() => {
             currentSlide = (currentSlide + 1) % slides.length;
-            updateSlides();
-        }
-
-        createIndicators();
-        setInterval(nextSlide, 4000);
+            showSlide(currentSlide);
+        }, 4000);
 
         // Drawer
-        const drawer = document.querySelector(".drawer");
+        const profile = document.getElementById("profile");
+        const drawer = document.getElementById("drawer");
 
-        function toggleDrawer() {
+        profile.addEventListener("click", () => {
             drawer.classList.toggle("open");
-        }
+        });
     </script>
-
-    <div class="drawer">
-        <h3>Meu Perfil</h3>
-        <p>Informações do usuário aparecerão aqui.</p>
-        <button>Configurações</button>
-        <button>Sair</button>
-    </div>
 </body>
 </html>
