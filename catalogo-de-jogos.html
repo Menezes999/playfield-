@@ -136,90 +136,6 @@
         .drawer button:hover {
             background-color: #e67e22;
         }
-
-        /* Jogos em Destaque */
-        main {
-            padding: 2rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        h2 {
-            text-align: left;
-            color: #f1c40f;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #f1c40f;
-            padding-bottom: 0.5rem;
-        }
-        .games {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px;
-            flex-wrap: nowrap;
-        }
-        .game-card {
-            background-color: #444;
-            padding: 20px;
-            border-radius: 12px;
-            min-width: 180px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .game-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .game-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .game-card button {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .game-card button:hover {
-            background-color: #e67e22;
-        }
-
-        /* Pop-up */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #1A1D22;
-            color: #fff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            display: none;
-            z-index: 3000;
-        }
-        .popup.show {
-            display: block;
-        }
-        .popup button {
-            margin-top: 1rem;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .popup button:hover {
-            background-color: #e67e22;
-        }
     </style>
 </head>
 <body>
@@ -237,46 +153,52 @@
         <img src="banner1.png" alt="Banner 1" class="active">
         <img src="banner2.png" alt="Banner 2">
         <img src="banner3.png" alt="Banner 3">
-        <div class="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-        </div>
-    </div>
-
-    <main>
-        <h2>Jogos em Destaque</h2>
-        <div class="games">
-            <div class="game-card" onclick="openPopup('Jogo 1')">
-                <img src="jogo1.jpg" alt="Jogo 1">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card" onclick="openPopup('Jogo 2')">
-                <img src="jogo2.jpg" alt="Jogo 2">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card" onclick="openPopup('Jogo 3')">
-                <img src="jogo3.jpg" alt="Jogo 3">
-                <button>Jogar Agora</button>
-            </div>
-        </div>
-    </main>
-
-    <div class="popup" id="popup">
-        <h3 id="popup-title">Título do Jogo</h3>
-        <p>Mais detalhes sobre o jogo estarão aqui!</p>
-        <button onclick="closePopup()">Fechar</button>
+        <div class="indicators" id="indicators"></div>
     </div>
 
     <script>
-        function openPopup(gameTitle) {
-            document.getElementById('popup-title').innerText = gameTitle;
-            document.getElementById('popup').classList.add('show');
+        // Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".banner img");
+        const indicators = document.querySelector(".indicators");
+
+        function createIndicators() {
+            slides.forEach((_, index) => {
+                const dot = document.createElement("div");
+                dot.classList.add("indicator");
+                if (index === 0) dot.classList.add("active");
+                indicators.appendChild(dot);
+            });
         }
 
-        function closePopup() {
-            document.getElementById('popup').classList.remove('show');
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle("active", index === currentSlide);
+                indicators.children[index].classList.toggle("active", index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlides();
+        }
+
+        createIndicators();
+        setInterval(nextSlide, 4000);
+
+        // Drawer
+        const drawer = document.querySelector(".drawer");
+
+        function toggleDrawer() {
+            drawer.classList.toggle("open");
         }
     </script>
+
+    <div class="drawer">
+        <h3>Meu Perfil</h3>
+        <p>Informações do usuário aparecerão aqui.</p>
+        <button>Configurações</button>
+        <button>Sair</button>
+    </div>
 </body>
 </html>
