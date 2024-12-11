@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayField - Página Inicial</title>
+    <title>PlayField - Catálogo</title>
     <style>
         /* Estilos Gerais */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36; /* Cinza escuro para o fundo */
+            background-color: #2C2F36;
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -18,116 +18,156 @@
 
         /* Header */
         header {
-            text-align: center;
-            margin-top: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: #1A1D22;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-        header h1 {
-            font-size: 3rem;
-            color: #f1c40f;
+        .logo {
+            width: 120px;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+        .profile:hover {
+            transform: scale(1.1);
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .welcome {
             margin: 0;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #fff;
-            margin: 1rem 0 2rem;
+            font-size: 0.9rem;
+            color: #f1c40f;
         }
 
-        /* Botões */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
+        /* Gaveta Lateral */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: #333;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            padding: 1rem;
+            z-index: 2000;
+            overflow-y: auto;
         }
-        .buttons button {
-            padding: 1rem 2rem;
+        .drawer.open {
+            right: 0;
+        }
+        .drawer h3 {
             font-size: 1.2rem;
-            color: #000;
+            margin: 0 0 1rem;
+            color: #f1c40f;
+            text-align: center;
+        }
+        .drawer button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 10px;
             background-color: #f1c40f;
+            color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .buttons button:hover {
+        .drawer button:hover {
             background-color: #e67e22;
         }
 
-        /* Modal (Pop-up) */
-        .modal {
-            display: none;
+        /* Estilo do Pop-up */
+        .popup {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        .modal.active {
-            display: flex;
-        }
-        .modal-content {
-            background-color: #333;
-            padding: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #444;
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 3000;
             text-align: center;
-            width: 80%;
-            max-width: 500px;
         }
-        .modal-content h2 {
-            color: #f1c40f;
-            margin-bottom: 1rem;
-        }
-        .modal-content p {
-            color: #fff;
-            margin-bottom: 1.5rem;
-        }
-        .modal-content button {
-            padding: 0.8rem 1.5rem;
+        .popup button {
+            margin-top: 15px;
+            padding: 10px 20px;
             background-color: #f1c40f;
             border: none;
-            color: #000;
-            font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
         }
-        .modal-content button:hover {
+        .popup button:hover {
             background-color: #e67e22;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>PlayField</h1>
-        <p>O site perfeito para gamers e developers!</p>
+        <img src="logo.png" alt="PlayField Logo" class="logo">
+        <div class="profile-section">
+            <p class="welcome">Bem-vindo</p>
+            <div class="profile" id="profile" onclick="toggleDrawer()">
+                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
+            </div>
+        </div>
     </header>
-    <div class="buttons">
-        <button id="play-now">Jogue Agora</button>
-        <button id="submit-game">Envie seu Jogo</button>
+
+    <div class="drawer" id="drawer">
+        <h3>Editar Perfil</h3>
+        <div class="profile-upload">
+            <img id="profile-preview" src="semfoto.jpg" alt="Prévia da Foto">
+            <button onclick="saveProfilePhoto()">Salvar Alterações</button>
+        </div>
+        <button onclick="showPopup()">Fechar</button>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Jogue Agora</h2>
-            <p>Cadastre-se ou faça login para acessar os jogos!</p>
-            <button onclick="closeModal()">Fechar</button>
-        </div>
+    <div class="popup" id="popup">
+        <p>Tem certeza de que deseja fechar?</p>
+        <button onclick="confirmClose()">Sim</button>
+        <button onclick="closePopup()">Cancelar</button>
     </div>
 
     <script>
-        // Modal Logic
-        const modal = document.getElementById('modal');
-        const playNowButton = document.getElementById('play-now');
+        const drawer = document.getElementById('drawer');
+        const popup = document.getElementById('popup');
 
-        playNowButton.addEventListener('click', () => {
-            modal.classList.add('active');
-        });
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+        }
 
-        function closeModal() {
-            modal.classList.remove('active');
+        function showPopup() {
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        function confirmClose() {
+            popup.style.display = 'none';
+            drawer.classList.remove('open');
         }
     </script>
 </body>
