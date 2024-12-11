@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36; /* Fundo cinza escuro */
+            background-color: #2C2F36;  /* Cinza escuro para o fundo */
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -25,18 +25,14 @@
             background-color: #1A1D22; /* Tom mais escuro de cinza */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-
         .logo {
-            font-size: 1.5rem;
-            color: #f1c40f;
+            width: 120px;
         }
-
         .profile-section {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
         .profile {
             width: 40px;
             height: 40px;
@@ -47,15 +43,18 @@
             border: 3px solid #f1c40f;
             transition: transform 0.3s ease;
         }
-
         .profile:hover {
             transform: scale(1.1);
         }
-
         .profile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .welcome {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #f1c40f;
         }
 
         /* Slideshow */
@@ -66,7 +65,6 @@
             overflow: hidden;
             margin-top: 1rem;
         }
-
         .banner img {
             position: absolute;
             top: 0;
@@ -77,11 +75,9 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-
         .banner img.active {
             opacity: 1;
         }
-
         .indicators {
             position: absolute;
             bottom: 10px;
@@ -90,7 +86,6 @@
             display: flex;
             gap: 10px;
         }
-
         .indicator {
             width: 10px;
             height: 10px;
@@ -99,7 +94,6 @@
             opacity: 0.5;
             transition: opacity 0.3s;
         }
-
         .indicator.active {
             opacity: 1;
         }
@@ -118,18 +112,15 @@
             z-index: 2000;
             overflow-y: auto;
         }
-
         .drawer.open {
             right: 0;
         }
-
         .drawer h3 {
             font-size: 1.2rem;
             margin: 0 0 1rem;
             color: #f1c40f;
             text-align: center;
         }
-
         .drawer button {
             display: block;
             width: 100%;
@@ -142,63 +133,92 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .drawer button:hover {
             background-color: #e67e22;
         }
+
+        /* Jogos em Destaque */
+        main {
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        h2 {
+            text-align: left;
+            color: #f1c40f;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 0.5rem;
+        }
+        .games {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px;
+            flex-wrap: nowrap;
+        }
+        .game-card {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 180px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .game-card button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #f1c40f;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .game-card button:hover {
+            background-color: #e67e22;
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">PlayField</div>
+        <img src="logo.png" alt="PlayField Logo" class="logo">
         <div class="profile-section">
+            <p class="welcome">Bem-vindo</p>
             <div class="profile" id="profile" onclick="toggleDrawer()">
                 <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
             </div>
         </div>
     </header>
 
-    <div class="banner" id="banner">
-        <img src="banner1.png" alt="Banner 1" class="active">
-        <img src="banner2.png" alt="Banner 2">
-        <img src="banner3.png" alt="Banner 3">
-        <div class="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
+    <main>
+        <h2>Jogos em Destaque</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="jogo1.jpg" alt="Jogo 1">
+                <button onclick="window.location.href='download.html'">Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo2.jpg" alt="Jogo 2">
+                <button>Jogar Agora</button>
+            </div>
+            <div class="game-card">
+                <img src="jogo3.jpg" alt="Jogo 3">
+                <button>Jogar Agora</button>
+            </div>
         </div>
-    </div>
-
-    <div class="drawer" id="drawer">
-        <h3>Editar Perfil</h3>
-        <button onclick="toggleDrawer()">Fechar</button>
-    </div>
-
-    <script>
-        const drawer = document.getElementById('drawer');
-        const profilePic = document.getElementById('profile-pic');
-        const indicators = document.querySelectorAll('.indicator');
-        const bannerImages = document.querySelectorAll('.banner img');
-        let currentImageIndex = 0;
-
-        // Função para abrir/fechar gaveta lateral
-        function toggleDrawer() {
-            drawer.classList.toggle('open');
-        }
-
-        // Slideshow automático para o banner
-        function updateBanner() {
-            bannerImages[currentImageIndex].classList.remove('active');
-            indicators[currentImageIndex].classList.remove('active');
-
-            currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
-
-            bannerImages[currentImageIndex].classList.add('active');
-            indicators[currentImageIndex].classList.add('active');
-        }
-
-        // Intervalo para troca do banner a cada 4 segundos
-        setInterval(updateBanner, 4000);
-    </script>
+    </main>
 </body>
 </html>
