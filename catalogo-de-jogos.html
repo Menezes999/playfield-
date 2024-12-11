@@ -9,19 +9,20 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;
+            background-color: #2C2F36; /* Fundo cinza escuro */
             color: #fff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 3rem;
-            background-color: #1A1D22;
+            background-color: #1A1D22; /* Tom mais escuro de cinza */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
@@ -33,6 +34,7 @@
         .profile-section {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .profile {
@@ -43,6 +45,11 @@
             overflow: hidden;
             cursor: pointer;
             border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+
+        .profile:hover {
+            transform: scale(1.1);
         }
 
         .profile img {
@@ -51,6 +58,7 @@
             object-fit: cover;
         }
 
+        /* Slideshow */
         .banner {
             position: relative;
             width: 100%;
@@ -74,6 +82,29 @@
             opacity: 1;
         }
 
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .indicator.active {
+            opacity: 1;
+        }
+
+        /* Gaveta Lateral */
         .drawer {
             position: fixed;
             top: 0;
@@ -84,25 +115,32 @@
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
             padding: 1rem;
-            z-index: 1000;
+            z-index: 2000;
+            overflow-y: auto;
         }
 
         .drawer.open {
             right: 0;
         }
 
-        .drawer h2 {
+        .drawer h3 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem;
             color: #f1c40f;
-            margin-bottom: 1rem;
+            text-align: center;
         }
 
         .drawer button {
-            margin-top: 1rem;
+            display: block;
+            width: 100%;
             padding: 0.5rem;
+            margin-top: 10px;
             background-color: #f1c40f;
+            color: #000;
             border: none;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .drawer button:hover {
@@ -114,8 +152,8 @@
     <header>
         <div class="logo">PlayField</div>
         <div class="profile-section">
-            <div class="profile" id="profile">
-                <img src="semfoto.jpg" alt="Foto de Perfil">
+            <div class="profile" id="profile" onclick="toggleDrawer()">
+                <img src="semfoto.jpg" id="profile-pic" alt="Perfil">
             </div>
         </div>
     </header>
@@ -124,37 +162,43 @@
         <img src="banner1.png" alt="Banner 1" class="active">
         <img src="banner2.png" alt="Banner 2">
         <img src="banner3.png" alt="Banner 3">
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
     </div>
 
     <div class="drawer" id="drawer">
-        <h2>Meu Perfil</h2>
-        <p>Configurações do usuário</p>
-        <button>Sair</button>
+        <h3>Editar Perfil</h3>
+        <button onclick="toggleDrawer()">Fechar</button>
     </div>
 
     <script>
-        // Slideshow
-        let currentSlide = 0;
-        const slides = document.querySelectorAll(".banner img");
+        const drawer = document.getElementById('drawer');
+        const profilePic = document.getElementById('profile-pic');
+        const indicators = document.querySelectorAll('.indicator');
+        const bannerImages = document.querySelectorAll('.banner img');
+        let currentImageIndex = 0;
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle("active", i === index);
-            });
+        // Função para abrir/fechar gaveta lateral
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
         }
 
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 4000);
+        // Slideshow automático para o banner
+        function updateBanner() {
+            bannerImages[currentImageIndex].classList.remove('active');
+            indicators[currentImageIndex].classList.remove('active');
 
-        // Drawer
-        const profile = document.getElementById("profile");
-        const drawer = document.getElementById("drawer");
+            currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
 
-        profile.addEventListener("click", () => {
-            drawer.classList.toggle("open");
-        });
+            bannerImages[currentImageIndex].classList.add('active');
+            indicators[currentImageIndex].classList.add('active');
+        }
+
+        // Intervalo para troca do banner a cada 4 segundos
+        setInterval(updateBanner, 4000);
     </script>
 </body>
 </html>
