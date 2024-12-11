@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;
+            background-color: #2C2F36;  /* Cinza escuro para o fundo */
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -22,18 +22,130 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 3rem;
-            background-color: #1A1D22;
+            background-color: #1A1D22; /* Tom mais escuro de cinza */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .logo {
             width: 120px;
         }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+        .profile:hover {
+            transform: scale(1.1);
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .welcome {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #f1c40f;
+        }
+
+        /* Slideshow */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .banner img.active {
+            opacity: 1;
+        }
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .indicator.active {
+            opacity: 1;
+        }
+
+        /* Gaveta Lateral */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: #333;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            padding: 1rem;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer h3 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem;
+            color: #f1c40f;
+            text-align: center;
+        }
+        .drawer button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 10px;
+            background-color: #f1c40f;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .drawer button:hover {
+            background-color: #e67e22;
+        }
 
         /* Jogos em Destaque */
         main {
             padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         h2 {
+            text-align: left;
             color: #f1c40f;
             font-size: 1.5rem;
             border-bottom: 2px solid #f1c40f;
@@ -43,6 +155,8 @@
             display: flex;
             gap: 20px;
             overflow-x: auto;
+            padding: 10px;
+            flex-wrap: nowrap;
         }
         .game-card {
             background-color: #444;
@@ -50,6 +164,11 @@
             border-radius: 12px;
             min-width: 180px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .game-card img {
             width: 100%;
@@ -65,6 +184,41 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .game-card button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Formulário de Upload de Foto */
+        .profile-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .profile-upload img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #f1c40f;
+        }
+        .profile-upload input[type="file"] {
+            display: none;
+        }
+        .profile-upload label {
+            background-color: #f1c40f;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .profile-upload label:hover {
+            background-color: #e67e22;
         }
 
         /* Modal */
@@ -74,88 +228,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s, opacity 0.3s;
+            z-index: 3000;
         }
         .modal.active {
-            display: flex;
+            visibility: visible;
+            opacity: 1;
         }
         .modal-content {
             background-color: #1A1D22;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            color: #fff;
             width: 90%;
             max-width: 400px;
         }
         .modal-content img {
             width: 100%;
             border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .modal-content h3 {
+            color: #f1c40f;
+            margin-bottom: 15px;
+        }
+        .modal-content p {
+            color: #ccc;
             margin-bottom: 15px;
         }
         .modal-content button {
-            margin-top: 10px;
             padding: 10px 20px;
             background-color: #f1c40f;
-            color: #000;
             border: none;
             border-radius: 5px;
+            color: #000;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .modal-content button:hover {
-            background-color: #e67e22;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="logo.png" alt="PlayField Logo" class="logo">
-    </header>
-
-    <main>
-        <h2>Jogos em Destaque</h2>
-        <div class="games">
-            <div class="game-card">
-                <img src="jogo1.jpg" alt="Jogo 1">
-                <button onclick="openModal('jogo1.jpg', 'Jogo 1', 'Este é um jogo incrível para você se divertir!')">Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="jogo2.jpg" alt="Jogo 2">
-                <button>Jogar Agora</button>
-            </div>
-            <div class="game-card">
-                <img src="jogo3.jpg" alt="Jogo 3">
-                <button>Jogar Agora</button>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modal -->
-    <div class="modal" id="gameModal">
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="Game Image">
-            <h3 id="modalTitle"></h3>
-            <button>Instalar</button>
-            <p id="modalDescription"></p>
-            <button onclick="closeModal()">Fechar</button>
-        </div>
-    </div>
-
-    <script>
-        function openModal(imageSrc, title, description) {
-            document.getElementById('modalImage').src = imageSrc;
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDescription').textContent = description;
-            document.getElementById('gameModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('gameModal').classList.remove('active');
-        }
-    </script>
-</body>
-</html>
