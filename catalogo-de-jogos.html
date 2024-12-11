@@ -9,58 +9,220 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2C2F36;
+            background-color: #2C2F36;  /* Cinza escuro para o fundo */
             color: #fff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Popup */
-        .popup {
-            position: fixed;
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: #1A1D22; /* Tom mais escuro de cinza */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            width: 120px;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid #f1c40f;
+            transition: transform 0.3s ease;
+        }
+        .profile:hover {
+            transform: scale(1.1);
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .welcome {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #f1c40f;
+        }
+
+        /* Slideshow */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .banner img {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-        }
-        .popup-content {
-            background-color: #444;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            text-align: center;
-            color: #f1c40f;
-        }
-        .popup-content img {
-            width: 100%;
-            height: 150px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
-        .popup-content button {
+        .banner img.active {
+            opacity: 1;
+        }
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .indicator.active {
+            opacity: 1;
+        }
+
+        /* Gaveta Lateral */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: #333;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            padding: 1rem;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer h3 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem;
+            color: #f1c40f;
+            text-align: center;
+        }
+        .drawer button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 10px;
             background-color: #f1c40f;
+            color: #000;
             border: none;
-            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            color: #000;
-            font-weight: bold;
             transition: background-color 0.3s ease;
         }
-        .popup-content button:hover {
+        .drawer button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Jogos em Destaque */
+        main {
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        h2 {
+            text-align: left;
+            color: #f1c40f;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 0.5rem;
+        }
+        .games {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px;
+            flex-wrap: nowrap;
+        }
+        .game-card {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 180px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .game-card button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #f1c40f;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .game-card button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Pop-up */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1A1D22;
+            color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 3000;
+        }
+        .popup.show {
+            display: block;
+        }
+        .popup button {
+            margin-top: 1rem;
+            background-color: #f1c40f;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .popup button:hover {
             background-color: #e67e22;
         }
     </style>
 </head>
 <body>
-    <!-- Resto do código permanece inalterado -->
     <header>
         <img src="logo.png" alt="PlayField Logo" class="logo">
         <div class="profile-section">
@@ -85,40 +247,35 @@
     <main>
         <h2>Jogos em Destaque</h2>
         <div class="games">
-            <div class="game-card">
+            <div class="game-card" onclick="openPopup('Jogo 1')">
                 <img src="jogo1.jpg" alt="Jogo 1">
-                <button onclick="openPopup()">Jogar Agora</button>
+                <button>Jogar Agora</button>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openPopup('Jogo 2')">
                 <img src="jogo2.jpg" alt="Jogo 2">
                 <button>Jogar Agora</button>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openPopup('Jogo 3')">
                 <img src="jogo3.jpg" alt="Jogo 3">
                 <button>Jogar Agora</button>
             </div>
         </div>
     </main>
 
-    <!-- Popup -->
     <div class="popup" id="popup">
-        <div class="popup-content">
-            <img src="jogo1.jpg" alt="Jogo 1">
-            <h3>Jogo 1</h3>
-            <p>Descrição do Jogo 1: Um jogo emocionante e cheio de aventura!</p>
-            <button onclick="closePopup()">Instalar Agora</button>
-        </div>
+        <h3 id="popup-title">Título do Jogo</h3>
+        <p>Mais detalhes sobre o jogo estarão aqui!</p>
+        <button onclick="closePopup()">Fechar</button>
     </div>
 
     <script>
-        const popup = document.getElementById('popup');
-
-        function openPopup() {
-            popup.style.display = 'flex';
+        function openPopup(gameTitle) {
+            document.getElementById('popup-title').innerText = gameTitle;
+            document.getElementById('popup').classList.add('show');
         }
 
         function closePopup() {
-            popup.style.display = 'none';
+            document.getElementById('popup').classList.remove('show');
         }
     </script>
 </body>
